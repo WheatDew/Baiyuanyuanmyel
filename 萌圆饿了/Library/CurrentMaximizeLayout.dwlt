@@ -39,9 +39,10 @@ MonoBehaviour:
 =======
     width: 1920
     height: 947
-  m_MinSize: {x: 878, y: 492}
-  m_MaxSize: {x: 16003, y: 14042}
+  m_MinSize: {x: 880, y: 492}
+  m_MaxSize: {x: 16005, y: 14042}
   vertical: 0
+<<<<<<< HEAD
   controlID: 4931
 >>>>>>> parent of 9801bc7 (更新灯光)
 =======
@@ -52,6 +53,9 @@ MonoBehaviour:
   vertical: 0
   controlID: 4931
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+  controlID: 142
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,9 +187,10 @@ MonoBehaviour:
 =======
     width: 1531
     height: 947
-  m_MinSize: {x: 603, y: 492}
-  m_MaxSize: {x: 12003, y: 14042}
+  m_MinSize: {x: 604, y: 492}
+  m_MaxSize: {x: 12004, y: 14042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 4932
 >>>>>>> parent of 9801bc7 (更新灯光)
 =======
@@ -196,6 +201,9 @@ MonoBehaviour:
   vertical: 1
   controlID: 4932
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+  controlID: 143
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,11 +252,15 @@ MonoBehaviour:
 =======
     width: 1531
     height: 671
-  m_MinSize: {x: 603, y: 221}
-  m_MaxSize: {x: 12003, y: 4021}
+  m_MinSize: {x: 604, y: 221}
+  m_MaxSize: {x: 12004, y: 4021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 4933
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+  controlID: 144
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -309,6 +321,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ExpandedIDs: 9ad0ffffc0430000484c000084510000
 =======
       m_ExpandedIDs: bcefffff94410000a6410000da4200008a46000016480000e6490000
@@ -319,6 +332,9 @@ MonoBehaviour:
 =======
       m_ExpandedIDs: 6afbffff7c3f00008c3f0000
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+      m_ExpandedIDs: 66fbffff903f0000
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -426,6 +442,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 2.4816484, y: 2.8104374, z: 5.380436}
     speed: 2
     m_Value: {x: 2.4816484, y: 2.8104374, z: 5.380436}
@@ -444,6 +461,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 6.959487, y: 2.2708473, z: 1.81738}
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    m_Target: {x: 0.9432821, y: 9.439341, z: -0.9444742}
+    speed: 2
+    m_Value: {x: 0.9432821, y: 9.439341, z: -0.9444742}
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -492,6 +514,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 0.04970515, y: 0.058389284, z: -0.0029044661, w: 0.99706644}
 =======
     m_Target: {x: 0.25342038, y: -0.06524219, z: 0.017137175, w: 0.9650125}
@@ -499,11 +522,15 @@ MonoBehaviour:
 =======
     m_Target: {x: 0.25342038, y: -0.06524219, z: 0.017137175, w: 0.9650125}
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    m_Target: {x: 0.02019842, y: -0.31829673, z: 0.0067879916, w: 0.94776064}
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
     speed: 2
-    m_Value: {x: 0.2534177, y: -0.0652415, z: 0.017136993, w: 0.96500224}
+    m_Value: {x: 0.020198248, y: -0.31829405, z: 0.0067879343, w: 0.9477526}
   m_Size:
-    m_Target: 13.760963
+    m_Target: 3.1185968
     speed: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     m_Value: 14.327826
@@ -522,6 +549,9 @@ MonoBehaviour:
 =======
     m_Value: 13.760963
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    m_Value: 3.1185968
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -605,12 +635,17 @@ MonoBehaviour:
 >>>>>>> parent of 9801bc7 (更新灯光)
     width: 411
     height: 671
+<<<<<<< HEAD
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
 <<<<<<< HEAD
 >>>>>>> parent of 9801bc7 (更新灯光)
 =======
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -647,6 +682,7 @@ MonoBehaviour:
     y: 671
     width: 1531
     height: 276
+<<<<<<< HEAD
 >>>>>>> parent of 9801bc7 (更新灯光)
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
@@ -657,6 +693,10 @@ MonoBehaviour:
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
 >>>>>>> e07413ca423c9e03e2419df70f739d26e26aa5f1
+=======
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -715,6 +755,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 51}
     m_SelectedIDs: 18560000
     m_LastClickedID: 22040
@@ -736,6 +777,12 @@ MonoBehaviour:
 >>>>>>> parent of 9801bc7 (更新灯光)
 =======
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    scrollPos: {x: 0, y: 62}
+    m_SelectedIDs: ae4a0000
+    m_LastClickedID: 19118
+    m_ExpandedIDs: 00000000984a00009a4a00009c4a00009e4a000000ca9a3b
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -766,6 +813,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000ea550000ec550000ee550000f0550000f455000000ca9a3b
 =======
     m_ExpandedIDs: 00000000d04c0000d24c0000d44c0000d64c0000d84c0000da4c0000dc4c0000de4c0000e04c000000ca9a3b
@@ -776,6 +824,9 @@ MonoBehaviour:
 =======
     m_ExpandedIDs: 00000000964a0000984a00009a4a00009c4a0000a84a0000aa4a0000c24a0000c44a0000c64a000000ca9a3b
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    m_ExpandedIDs: 00000000984a00009a4a00009c4a00009e4a0000
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -803,6 +854,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 84450000
     m_LastClickedInstanceID: 17796
 =======
@@ -817,6 +869,10 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 7c3e0000
     m_LastClickedInstanceID: 15996
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+    m_SelectedInstanceIDs: bc470000
+    m_LastClickedInstanceID: 18364
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -891,8 +947,8 @@ MonoBehaviour:
     y: 0
     width: 389
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -937,6 +993,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LastInspectedObjectInstanceID: 17796
 =======
   m_LastInspectedObjectInstanceID: 15996
@@ -944,6 +1001,9 @@ MonoBehaviour:
 =======
   m_LastInspectedObjectInstanceID: 15996
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+  m_LastInspectedObjectInstanceID: 18364
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
   m_LastVerticalScrollValue: 0
 =======
   m_LastInspectedObjectInstanceID: 15424
