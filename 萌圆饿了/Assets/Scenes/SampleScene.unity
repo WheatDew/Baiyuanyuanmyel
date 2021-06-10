@@ -4324,6 +4324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 3, z: -10}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!114 &232798617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6209,6 +6210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 5.2, z: -10}
+  rotation: {x: 30, y: 0, z: 0}
 --- !u!1 &316537616
 GameObject:
   m_ObjectHideFlags: 0
@@ -23477,6 +23479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 3, z: -10}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!114 &1186848937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28999,6 +29002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 5.2, z: -10}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &1449645863
 GameObject:
   m_ObjectHideFlags: 0
