@@ -6224,12 +6224,15 @@ MonoBehaviour:
   position: {x: 0, y: 5.2, z: -10}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   rotation: {x: 10, y: 0, z: 0}
 =======
   rotation: {x: 30, y: 0, z: 0}
 >>>>>>> e07413ca423c9e03e2419df70f739d26e26aa5f1
 =======
 >>>>>>> parent of 8ad336a (Merge branch 'main' of https://github.com/WheatDew/baiyuanyuanmyel into main)
+=======
+>>>>>>> parent of 9801bc7 (更新灯光)
 =======
 >>>>>>> parent of 9801bc7 (更新灯光)
 --- !u!1 &316537616
@@ -7821,9 +7824,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: -59.249004, y: -34.448, z: -0.767}
 =======
 >>>>>>> parent of 8ad336a (Merge branch 'main' of https://github.com/WheatDew/baiyuanyuanmyel into main)
+=======
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+>>>>>>> parent of 9801bc7 (更新灯光)
 =======
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 >>>>>>> parent of 9801bc7 (更新灯光)
@@ -19486,10 +19493,14 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: 0, y: 3, z: -10.21}
 =======
   m_LocalPosition: {x: 0, y: 3.33, z: -10}
 >>>>>>> parent of 8ad336a (Merge branch 'main' of https://github.com/WheatDew/baiyuanyuanmyel into main)
+=======
+  m_LocalPosition: {x: 0, y: 3, z: -10}
+>>>>>>> parent of 9801bc7 (更新灯光)
 =======
   m_LocalPosition: {x: 0, y: 3, z: -10}
 >>>>>>> parent of 9801bc7 (更新灯光)
@@ -28783,12 +28794,15 @@ MonoBehaviour:
   position: {x: 0, y: 5.2, z: -10}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   rotation: {x: 10, y: 0, z: 0}
 =======
   rotation: {x: 0, y: 0, z: 0}
 >>>>>>> e07413ca423c9e03e2419df70f739d26e26aa5f1
 =======
 >>>>>>> parent of 8ad336a (Merge branch 'main' of https://github.com/WheatDew/baiyuanyuanmyel into main)
+=======
+>>>>>>> parent of 9801bc7 (更新灯光)
 =======
 >>>>>>> parent of 9801bc7 (更新灯光)
 --- !u!1 &1449645863
