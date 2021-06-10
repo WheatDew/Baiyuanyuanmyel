@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":2.4816484451293947,"y":2.8104374408721926,"z":5.380435943603516},"rotation":{"x":0.049705151468515399,"y":0.05838928371667862,"z":-0.0029044661205261947,"w":0.9970664381980896},"size":14.327825546264649,"orthographic":false}
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":499.0418701171875,"y":877.6822509765625,"z":1.55224609375},"rotation":{"x":0.09174562245607376,"y":0.1738387644290924,"z":-0.0162632018327713,"w":0.9803724884986877},"size":1477.6300048828125,"orthographic":false}
@@ -12,6 +13,9 @@
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":6.959486961364746,"y":2.2708473205566408,"z":1.8173799514770508},"rotation":{"x":0.18225060403347016,"y":0.21342997252941132,"z":-0.04056326672434807,"w":0.9589638710021973},"size":22.290611267089845,"orthographic":false}
 >>>>>>> parent of 9801bc7 (更新灯光)
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":1.0614644289016724,"y":5.1178789138793949,"z":-0.4202594757080078},"rotation":{"x":0.24039354920387269,"y":-0.06401420384645462,"z":0.015896134078502656,"w":0.9684411287307739},"size":5.7773613929748539,"orthographic":false}
+>>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":1.0614644289016724,"y":5.1178789138793949,"z":-0.4202594757080078},"rotation":{"x":0.24039354920387269,"y":-0.06401420384645462,"z":0.015896134078502656,"w":0.9684411287307739},"size":5.7773613929748539,"orthographic":false}
 >>>>>>> parent of e08fa74 (摄像机旋转和设置旋转)
