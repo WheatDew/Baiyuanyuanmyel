@@ -28,16 +28,16 @@ public class PlayerSelfMove : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         switch (direction)
         {
             case PlayerDir.forward:
-                playerCamera.transform.position += Vector3.forward * Time.deltaTime;
+                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.forward * Time.deltaTime;
                 break;
             case PlayerDir.back:
-                playerCamera.transform.position += Vector3.back * Time.deltaTime;
+                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.back * Time.deltaTime;
                 break;
             case PlayerDir.left:
-                playerCamera.transform.position += Vector3.left * Time.deltaTime;
+                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.left * Time.deltaTime;
                 break;
             case PlayerDir.right:
-                playerCamera.transform.position += Vector3.right * Time.deltaTime;
+                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.right * Time.deltaTime;
                 break;
         }
 

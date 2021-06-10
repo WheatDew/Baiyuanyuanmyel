@@ -6210,7 +6210,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 5.2, z: -10}
+<<<<<<< HEAD
   rotation: {x: 10, y: 0, z: 0}
+=======
+  rotation: {x: 30, y: 0, z: 0}
+>>>>>>> e07413ca423c9e03e2419df70f739d26e26aa5f1
 --- !u!1 &316537616
 GameObject:
   m_ObjectHideFlags: 0
@@ -29094,7 +29098,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 5.2, z: -10}
+<<<<<<< HEAD
   rotation: {x: 10, y: 0, z: 0}
+=======
+  rotation: {x: 0, y: 0, z: 0}
+>>>>>>> e07413ca423c9e03e2419df70f739d26e26aa5f1
 --- !u!1 &1449645863
 GameObject:
   m_ObjectHideFlags: 0
