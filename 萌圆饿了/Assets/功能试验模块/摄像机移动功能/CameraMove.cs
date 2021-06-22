@@ -24,9 +24,9 @@ public class CameraMove : MonoBehaviour
 #if UNITY_ANDROID
 			if (Input.GetMouseButton(0))
             {
-                transform.localRotation=Quaternion.Euler(
-                transform.localRotation.eulerAngles.x - Input.GetAxis("Mouse Y"),
-                transform.localRotation.eulerAngles.y + Input.GetAxis("Mouse X"),0);
+                //transform.localRotation=Quaternion.Euler(
+                //transform.localRotation.eulerAngles.x - Input.GetAxis("Mouse Y"),
+                //transform.localRotation.eulerAngles.y + Input.GetAxis("Mouse X"),0);
             }
 #endif
     }

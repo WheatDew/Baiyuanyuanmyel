@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public enum PlayerDir { forward,back,left,right};
 public class PlayerSelfMove : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
+    public float speedValue; 
     public PlayerDir direction;
     private GameObject playerCamera;
     private bool flag;
@@ -25,19 +26,21 @@ public class PlayerSelfMove : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
 
     public void Move()
     {
+	Quaternion target= playerCamera.transform.rotation;
+       	 target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
         switch (direction)
         {
             case PlayerDir.forward:
-                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.forward * Time.deltaTime;
+                playerCamera.transform.localPosition += target * Vector3.forward * Time.deltaTime * speedValue;
                 break;
             case PlayerDir.back:
-                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.back * Time.deltaTime;
+                playerCamera.transform.localPosition += target * Vector3.back * Time.deltaTime * speedValue;
                 break;
             case PlayerDir.left:
-                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.left * Time.deltaTime;
+                playerCamera.transform.localPosition += target * Vector3.left * Time.deltaTime * speedValue;
                 break;
             case PlayerDir.right:
-                playerCamera.transform.localPosition += playerCamera.transform.rotation * Vector3.right * Time.deltaTime;
+                playerCamera.transform.localPosition += target * Vector3.right * Time.deltaTime * speedValue;
                 break;
         }
 
