@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CharacterTextureList : MonoBehaviour
 {
-    public Texture[] textureList;
+    public Sprite[] textureList;
 }
