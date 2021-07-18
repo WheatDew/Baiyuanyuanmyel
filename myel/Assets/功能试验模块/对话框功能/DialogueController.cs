@@ -20,8 +20,8 @@ public class DialogueController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit result;
-             Debug.Log(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out result));
+            //RaycastHit result;
+             //Debug.Log(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out result));
 
             //if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out result) && result.collider.tag == "Character")
             //    StartCoroutine(SetDailyConversation());

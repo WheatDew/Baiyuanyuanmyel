@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private AxisCamera a_camera;
     private Transform child;
-    public Vector3 min, max;
+    //public Vector3 min, max;
     [Range(0, 1)]
     public float currentHight;
 
@@ -23,9 +23,12 @@ public class CameraController : MonoBehaviour
             currentHight = 1;
         if (currentHight < 0)
             currentHight = 0;
-
-        child.localPosition = Vector3.Lerp(min, max, currentHight);
-        child.localRotation = Quaternion.AngleAxis(20 * (currentHight-0.0f), Vector3.right);
+        //float cx = currentHight*17<2? -currentHight*17+2:currentHight*17-2;
+        float cx = currentHight * 37-30;
+        float cy = Mathf.Pow(cx, 2) * 0.02f + 0.14f * cx;
+        child.localPosition = new Vector3(0, cy, cx);
+        //child.localPosition = Vector3.Lerp(min, max, currentHight);
+        child.localRotation = Quaternion.AngleAxis(Mathf.Pow(cx, 2) * (-0.1f) - 3.6f * cx, Vector3.right);
         if (Input.GetMouseButton(2))
             a_camera.transform.position += new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
     }
