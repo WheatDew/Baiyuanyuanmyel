@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
             currentHight = 0;
 
         child.localPosition = Vector3.Lerp(min, max, currentHight);
-        child.localRotation = Quaternion.AngleAxis(20 * currentHight, Vector3.right);
+        child.localRotation = Quaternion.AngleAxis(20 * (currentHight-0.0f), Vector3.right);
+        if (Input.GetMouseButton(2))
+            a_camera.transform.position += new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
     }
 }

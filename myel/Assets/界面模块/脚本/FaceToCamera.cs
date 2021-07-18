@@ -11,8 +11,12 @@ public class FaceToCamera : MonoBehaviour
     }
     public void SetCameraFace()
     {
-        Quaternion target= Quaternion.LookRotation(Camera.main.transform.position);
-        target.eulerAngles = new Vector3(0, target.eulerAngles.y-180, 0);
-        transform.rotation = target;
+        //if (Camera.main.gameObject.activeSelf)
+        //{
+        //    Quaternion target = Quaternion.LookRotation(Camera.main.transform.position);
+        //    target.eulerAngles = new Vector3(0, target.eulerAngles.y - 180, 0);
+        //    transform.rotation = target;
+        //}
+
     }
 }
