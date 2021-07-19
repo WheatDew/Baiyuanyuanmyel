@@ -8,6 +8,7 @@ public class CharacterAction : MonoBehaviour
     public float multiple;
     public float jumpMultiple;
     public bool isGround=false;
+    public string groundName;
 
     private void Update()
     {
@@ -29,7 +30,6 @@ public class CharacterAction : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGround = true;
-
         }
     }
 
@@ -38,8 +38,18 @@ public class CharacterAction : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGround = false;
-
         }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        groundName = other.gameObject.name;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        groundName = "";
     }
 
 }
