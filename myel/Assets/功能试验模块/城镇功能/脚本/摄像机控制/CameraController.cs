@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     //public Vector3 min, max;
     [Range(0, 1)]
     public float currentHight;
+    public Camera currentCamera;
 
     public void Start()
     {
