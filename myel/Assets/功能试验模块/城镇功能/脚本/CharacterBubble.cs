@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class CharacterBubble : MonoBehaviour
 {
+    public CharacterSelectionController c_characterSelection; 
     public CharacterAction characterAction;
     public CharacterBubbleItem bubblePrefab;
+    public GameObject bubbleStatus;
+    public SpriteRenderer bubbleWorkStatus;
     public Transform bubblePrefabParent;
-    public string actName,currentAreaName;
+    public UI3DController ui3dController;
+    public string actName,currentAreaName,currentWorkStatus;
     public Sprite[] texturelib;
     public string[] namelib;
+    public Dictionary<string, Sprite> spritelib = new Dictionary<string, Sprite>();
     public Dictionary<string, string[]> actPairs = new Dictionary<string, string[]>();
 
     private void Start()
     {
+        for(int i = 0; i < namelib.Length; i++)
+        {
+            spritelib.Add(namelib[i], texturelib[i]);
+        }
+
         actPairs.Add("池塘", new string[] { "摸鱼", "饮水" });
     }
 
     private void Update()
     {
-        if(currentAreaName != characterAction.groundName)
+        if(currentAreaName != characterAction.groundName&&currentWorkStatus=="")
         {
             if (actPairs.ContainsKey(characterAction.groundName))
             {
@@ -27,16 +37,34 @@ public class CharacterBubble : MonoBehaviour
             }
             else
             {
-                for(int i = 0; i < bubblePrefabParent.childCount; i++)
-                {
-                    Destroy(bubblePrefabParent.GetChild(i).gameObject);
-                }
+                ClearBubbleParent();
             }
         }
         
         currentAreaName = characterAction.groundName;
+
+        if (ui3dController.clickButtonName != "")
+        {
+            bubbleWorkStatus.sprite = spritelib[ui3dController.clickButtonName];
+            bubbleStatus.SetActive(true);
+            currentWorkStatus = ui3dController.clickButtonName;
+            
+            ui3dController.clickButtonName = "";
+
+        }
+
+        
+        
+        
     }
 
+    public void ClearBubbleParent()
+    {
+        for (int i = 0; i < bubblePrefabParent.childCount; i++)
+        {
+            Destroy(bubblePrefabParent.GetChild(i).gameObject);
+        }
+    }
 
     public void DisplayCurrentSelection(params string[] bubbles)
     {
@@ -54,9 +82,10 @@ public class CharacterBubble : MonoBehaviour
         int index = 0;
         foreach(var item in num)
         {
-            bubblePrefab.icon_c = texturelib[index];
+            bubblePrefab.icon_c = texturelib[item];
             bubblePrefab.transform.localPosition = new Vector3(index * 2 - num.Count / 2 , 4.6f, 0);
-            Instantiate(bubblePrefab, bubblePrefabParent);
+            CharacterBubbleItem obj= Instantiate(bubblePrefab, bubblePrefabParent);
+            obj.name = namelib[item];
             index++;
         }
     }

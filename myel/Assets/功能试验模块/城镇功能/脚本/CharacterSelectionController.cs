@@ -16,7 +16,7 @@ public class CharacterSelectionController : MonoBehaviour
             RaycastHit result;
             Physics.Raycast(cameraController.currentCamera.ScreenPointToRay(Input.mousePosition),out result);
             
-            if (result.collider.tag == "Character")
+            if (result.collider&&result.collider.tag == "Character")
             {
                 character = result.collider.gameObject;
                 characterUI.SetActive(true);
