@@ -34,31 +34,37 @@ public class CharacterValueStatus : MonoBehaviour
         }
     }
 
-    public void AnalysisCommand(string command)
+    public void AnalysisCommand(string commandGroup)
     {
-        string[] splits = command.Split(',');
-        string _type = splits[0];
-        string _name = splits[1];
-        string _value = splits[2];
+        string[] commands = commandGroup.Split(';');
+        foreach(var command in commands)
+        {
+            Debug.Log(command);
+            string[] splits = command.Split(',');
+            string _type = splits[0];
+            string _name = splits[1];
+            string _value = splits[2];
 
-        if (_type == "数值增加")
-        {
-            valueData[_name].ValueGain(float.Parse(_value));
-        }
-        else if (_type == "背包增加")
-        {
-            if (packData.ContainsKey(_name))
-                packData[_name] += int.Parse(_value);
-            else
+            if (_type == "数值增加")
             {
-                packData.Add(_name, int.Parse(_value));
+                valueData[_name].ValueGain(float.Parse(_value));
+            }
+            else if (_type == "背包增加")
+            {
+                if (packData.ContainsKey(_name))
+                    packData[_name] += int.Parse(_value);
+                else
+                {
+                    packData.Add(_name, int.Parse(_value));
+                }
+            }
+            else if (_type == "背包减少")
+            {
+                packData[_name] -= int.Parse(_value);
             }
         }
-        else if (_type == "背包减少")
-        {
-            //ToDo
-            packData[_name] -= int.Parse(_value);
-        }
+
+        
     }
     
     public void DisplayCurrentStatus()

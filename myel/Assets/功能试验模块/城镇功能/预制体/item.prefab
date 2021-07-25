@@ -139,7 +139,7 @@ MonoBehaviour:
   image: {fileID: 6539536251549061318}
   itemName: {fileID: 6126767809986106373}
   count: {fileID: 7572466418138012774}
-  command: "\u6570\u503C\u589E\u52A0,\u9965\u997F,20,"
+  command: "\u6570\u503C\u589E\u52A0,\u9965\u997F,20;\u80CC\u5305\u51CF\u5C11,\u9C7C,1"
 --- !u!1 &606399666516288156
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,8 +17,8 @@ public class PackPage : MonoBehaviour
     {
         spriteLib.Add("鱼", sprites[0]);
         spriteLib.Add("水", sprites[1]);
-        itemCommandLib.Add("鱼", "数值增加,饥饿,20,");
-        itemCommandLib.Add("水", "数值增加,饮水,20,");
+        itemCommandLib.Add("鱼", "数值增加,饥饿,20;背包减少,鱼,1");
+        itemCommandLib.Add("水", "数值增加,饮水,20;背包减少,水,1");
     }
 
     private void OnEnable()
