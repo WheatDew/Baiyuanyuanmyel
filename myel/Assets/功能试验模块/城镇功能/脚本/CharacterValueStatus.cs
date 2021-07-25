@@ -4,33 +4,88 @@ using UnityEngine;
 
 public class CharacterValueStatus : MonoBehaviour
 {
-    public Dictionary<string, float> valueData=new Dictionary<string, float>();
-    public Stack<string> waitingItem=new Stack<string>();
+    public Stack<string> command = new Stack<string>();
 
-    public float hungerValue;
+    public Dictionary<string, Status> valueData=new Dictionary<string, Status>();
+    public Dictionary<string, int> packData = new Dictionary<string, int>();
+    private Status statusValue;
 
     public void Start()
     {
-        valueData.Add("饥饿", 100);
+        valueData.Add("饥饿", new Status {value=100,rate=-1f }) ;
+        valueData.Add("饮水", new Status { value=100,rate=-2f });
+        StartCoroutine(ValueSetRate());
     }
 
     private void Update()
     {
-        valueData["饥饿"] -= Time.deltaTime;
-        hungerValue = valueData["饥饿"];
+        Command();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DisplayCurrentPack();
+        }
+    }
 
-        JWaitingItem();
+    public void Command()
+    {
+        while (command.Count != 0)
+        {
+            AnalysisCommand(command.Pop());
+        }
+    }
+
+    public void AnalysisCommand(string command)
+    {
+        string[] splits = command.Split(',');
+        string _type = splits[0];
+        string _name = splits[1];
+        string _value = splits[2];
+
+        if (_type == "数值增加")
+        {
+            valueData[_name].ValueGain(float.Parse(_value));
+        }
+        else if (_type == "背包增加")
+        {
+            if (packData.ContainsKey(_name))
+                packData[_name] += int.Parse(_value);
+            else
+            {
+                packData.Add(_name, int.Parse(_value));
+            }
+        }
+        else if (_type == "背包减少")
+        {
+            //ToDo
+            packData[_name] -= int.Parse(_value);
+        }
     }
     
-    public void JWaitingItem()
+    public void DisplayCurrentStatus()
     {
-        if(waitingItem.Count!=0)
+        foreach(var item in valueData)
         {
-            string itemName = waitingItem.Pop();
-            if (itemName == "鱼")
+            print(item.Key +" "+ item.Value);
+        }
+    }
+
+    public void DisplayCurrentPack()
+    {
+        foreach(var item in packData)
+        {
+            print(item.Key + " " + item.Value);
+        }
+    }
+
+    IEnumerator ValueSetRate()
+    {
+        while (true)
+        {
+            foreach(var item in valueData)
             {
-                valueData["饥饿"] += 10;
+                item.Value.ValueGain(item.Value.rate);
             }
+            yield return new WaitForSeconds(1);
         }
     }
 }

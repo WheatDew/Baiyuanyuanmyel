@@ -10,12 +10,12 @@ public class PackPage : MonoBehaviour
 
     private void Start()
     {
-        item.itemName = "鱼";
-        Instantiate(item, m_parent);
+        //item.itemName = "鱼";
+        //Instantiate(item, m_parent);
     }
 
-    public void AddItemWaiting(string itemName)
-    {
-        currentCharacter.waitingItem.Push(itemName);
-    }
+    //public void AddItemWaiting(string itemName)
+    //{
+    //    //currentCharacter.waitingItem.Push(itemName);
+    //}
 }

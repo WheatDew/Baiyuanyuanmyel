@@ -14,8 +14,8 @@ public class PackPageItem : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(delegate
         {
-            FindObjectOfType<PackPage>().AddItemWaiting(itemName);
-            image.sprite = icon;
+            //FindObjectOfType<PackPage>().AddItemWaiting(itemName);
+            //image.sprite = icon;
         });
     }
 }
