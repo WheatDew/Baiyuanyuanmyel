@@ -83,6 +83,7 @@ public class CharacterValueStatus : MonoBehaviour
         {
             foreach(var item in valueData)
             {
+                //Debug.Log(item.Value.value+" "+item.Value.rate);
                 item.Value.ValueGain(item.Value.rate);
             }
             yield return new WaitForSeconds(1);

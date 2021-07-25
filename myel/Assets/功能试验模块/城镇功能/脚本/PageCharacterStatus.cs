@@ -18,8 +18,8 @@ public class PageCharacterStatus : MonoBehaviour
     {
         if (characterSelectionController.character)
         {
-            hunger.text = characterValueStatus.valueData["饥饿"].ToString();
-            thirsty.text = characterValueStatus.valueData["饮水"].ToString();
+            hunger.text = characterValueStatus.valueData["饥饿"].value.ToString();
+            thirsty.text = characterValueStatus.valueData["饮水"].value.ToString();
         }
         else
         {

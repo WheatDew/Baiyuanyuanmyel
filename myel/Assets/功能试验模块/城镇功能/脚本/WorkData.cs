@@ -16,7 +16,7 @@ public struct Item
 
 }
 
-public struct Status
+public class Status
 {
     public float value;
     public float rate;

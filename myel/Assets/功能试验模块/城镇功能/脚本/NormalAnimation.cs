@@ -6,6 +6,7 @@ public class NormalAnimation : MonoBehaviour
 {
     public MeshRenderer m_meshRenderer;
     public int[] animationArray;
+    public int row=1, column=1;
 
     public void Start()
     {
@@ -33,6 +34,6 @@ public class NormalAnimation : MonoBehaviour
 
     public void SetCharacterTexture(int id)
     {
-        m_meshRenderer.material.mainTextureOffset = new Vector2((id / 5) * 0.25f, 1);
+        m_meshRenderer.material.mainTextureOffset = new Vector2((id / 5) * 1f/(float)row, (id % 5) * 1f/(float)column);
     }
 }
