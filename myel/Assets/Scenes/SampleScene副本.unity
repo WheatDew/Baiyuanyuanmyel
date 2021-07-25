@@ -24767,7 +24767,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 5756179083823709740, guid: 1632169ddfe37274ab214c7fd39b131a, type: 3}
   m_parent: {fileID: 2126530616}
-  currentCharacter: {fileID: 8051686707308394271}
+  selectionController: {fileID: 1391097143}
+  sprites:
+  - {fileID: 21300000, guid: 37159bdb71d63fb43b439d6b116c308d, type: 3}
+  - {fileID: 21300000, guid: d123bb6bec6a3d54a81a3e21c1862f78, type: 3}
 --- !u!1 &1038140281
 GameObject:
   m_ObjectHideFlags: 0
@@ -35254,7 +35257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1464734841
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 public class PackPageItem : MonoBehaviour
 {
-
+    public CharacterValueStatus characterValueStatus;
     public Button btn;
     public Image image;
-    public string itemName;
-    public Sprite icon;
+    public Text itemName;
+    public Text count;
+    public string command;
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(delegate
         {
-            //FindObjectOfType<PackPage>().AddItemWaiting(itemName);
-            //image.sprite = icon;
+            characterValueStatus.command.Push(command);
+             count.text= (int.Parse(count.text) - 1).ToString();
         });
     }
 }
