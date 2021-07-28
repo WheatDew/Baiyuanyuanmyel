@@ -10,18 +10,30 @@ public class CharacterAction : MonoBehaviour
     public bool isGround=false;
     public string groundName;
 
+    private CharacterSelectionController selectionController;
+
+    private void Start()
+    {
+        selectionController = FindObjectOfType<CharacterSelectionController>();
+    }
+
+
     private void Update()
     {
-        m_rigidbody.AddForce(Input.GetAxis("Horizontal")*multiple,0 , Input.GetAxis("Vertical") * multiple);
-
-        if (isGround&& Input.GetKeyDown(KeyCode.Space))
+        if(selectionController.character == gameObject)
         {
-            m_rigidbody.AddForce(Vector3.up * jumpMultiple);
+            m_rigidbody.AddForce(Input.GetAxis("Horizontal") * multiple, 0, Input.GetAxis("Vertical") * multiple);
 
+            if (isGround && Input.GetKeyDown(KeyCode.Space))
+            {
+                m_rigidbody.AddForce(Vector3.up * jumpMultiple);
+
+            }
+
+            if (!isGround)
+                m_rigidbody.AddForce(Vector3.down * jumpMultiple * 0.01f);
         }
-
-        if (!isGround)
-            m_rigidbody.AddForce(Vector3.down * jumpMultiple*0.01f);
+        
 
     }
 

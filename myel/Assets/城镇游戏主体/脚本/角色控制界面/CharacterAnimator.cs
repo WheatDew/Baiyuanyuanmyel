@@ -8,11 +8,13 @@ public class CharacterAnimator : MonoBehaviour
     private CharacterSelectionController selectionController;
     public MeshRenderer m_meshRenderer;
     public Rigidbody m_rigidbody;
+    public Texture currentTexture;
     public int[] animationArray;
     public bool isNav=true;
 
     public void Start()
     {
+        m_meshRenderer.material.mainTexture = currentTexture;
         selectionController = FindObjectOfType<CharacterSelectionController>();
         StartCoroutine(PlayAnimation());
     }
