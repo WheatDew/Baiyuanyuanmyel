@@ -23,32 +23,32 @@ public class CharacterAnimator : MonoBehaviour
     {
         
 
-        if((selectionController.character == null || selectionController.character != gameObject))
-        {
-            isNav = true;
-            if (Mathf.Abs(characterNavigation.targetPosition.x - transform.position.x)
-            < Mathf.Abs(characterNavigation.targetPosition.z - transform.position.z))
-            {
-                if (characterNavigation.targetPosition.z - transform.position.z > 0)
-                    animationArray = new int[] { 1, 6, 11, 16 };
-                if (characterNavigation.targetPosition.z - transform.position.z < 0)
-                    animationArray = new int[] { 2, 7, 12, 17 };
-            }
-            else
-            {
-                if (characterNavigation.targetPosition.x - transform.position.x < 0)
-                    animationArray = new int[] { 3, 8, 13, 18 };
-                if (characterNavigation.targetPosition.x - transform.position.x > 0)
-                    animationArray = new int[] { 4, 9, 14, 19 };
-            }
+        //if((selectionController.character == null || selectionController.character != gameObject))
+        //{
+        //    isNav = true;
+        //    if (Mathf.Abs(characterNavigation.targetPosition.x - transform.position.x)
+        //    < Mathf.Abs(characterNavigation.targetPosition.z - transform.position.z))
+        //    {
+        //        if (characterNavigation.targetPosition.z - transform.position.z > 0)
+        //            animationArray = new int[] { 1, 6, 11, 16 };
+        //        if (characterNavigation.targetPosition.z - transform.position.z < 0)
+        //            animationArray = new int[] { 2, 7, 12, 17 };
+        //    }
+        //    else
+        //    {
+        //        if (characterNavigation.targetPosition.x - transform.position.x < 0)
+        //            animationArray = new int[] { 3, 8, 13, 18 };
+        //        if (characterNavigation.targetPosition.x - transform.position.x > 0)
+        //            animationArray = new int[] { 4, 9, 14, 19 };
+        //    }
 
 
-            if (Mathf.Abs(characterNavigation.targetPosition.x - transform.position.x) < 0.05f
-                && Mathf.Abs(characterNavigation.targetPosition.z - transform.position.z) < 0.05f)
-                animationArray = new int[] { 0, 5, 10, 15 };
-        }
-        else
-        {
+        //    if (Mathf.Abs(characterNavigation.targetPosition.x - transform.position.x) < 0.05f
+        //        && Mathf.Abs(characterNavigation.targetPosition.z - transform.position.z) < 0.05f)
+        //        animationArray = new int[] { 0, 5, 10, 15 };
+        //}
+        //else
+        //{
             isNav = false;
             if (Mathf.Abs(m_rigidbody.velocity.x) < Mathf.Abs(m_rigidbody.velocity.z))
             {
@@ -68,7 +68,7 @@ public class CharacterAnimator : MonoBehaviour
 
             if (Mathf.Abs(m_rigidbody.velocity.x)<0.05f&& Mathf.Abs(m_rigidbody.velocity.z)<0.05f)
                 animationArray = new int[] { 0, 5, 10, 15 };
-        }
+        //}
 
         
     }
