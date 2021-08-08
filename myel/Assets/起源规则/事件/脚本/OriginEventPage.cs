@@ -21,9 +21,10 @@ public class OriginEventPage : MonoBehaviour
         foreach(var item in eventData.buttonList)
         {
             Button btn = Instantiate(buttonPrefab, buttonParent);
-            
+            btn.transform.GetChild(0).GetComponent<Text>().text = item.name;
             btn.onClick.AddListener(delegate
             {
+
                 foreach(var effectItem in item.effectList)
                 {
                     print(effectItem.name + " " + effectItem.value);

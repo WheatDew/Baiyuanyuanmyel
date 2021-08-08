@@ -115,6 +115,9 @@ public class OriginEventLib : MonoBehaviour
         }
     }
 
+    //同步角色工作百分率
+    public 
+
     public void WriteCondition(string condition)
     {
         currentCondition.Add(condition);

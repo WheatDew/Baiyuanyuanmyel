@@ -106,6 +106,7 @@ public class OriginCharacter : MonoBehaviour
     public OriginWorkBubble workBubblePrefab;
     public Transform workBubbleParent;
     public string currentWork;
+    public float currentWorkRate;
     private HashSet<string> workMap = new HashSet<string>();
     private HashSet<string> recordArea = new HashSet<string>();
 
