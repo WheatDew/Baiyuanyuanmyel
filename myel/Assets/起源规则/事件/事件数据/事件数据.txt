@@ -12,7 +12,7 @@
                     "effect": [
                         {
                             "name": "饥饿值",
-                            "value": 2
+                            "value": "2"
                         }
                     ]
                 },
@@ -21,7 +21,7 @@
                     "effect": [
                         {
                             "name": "饥饿值",
-                            "value": 20
+                            "value": "20"
                         }
                     ]
                 }

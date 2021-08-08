@@ -57,3 +57,9 @@ public class EventEffectData
         this.value = value;
     }
 }
+
+public struct EffectData
+{
+    public string name;
+    public string value;
+}
