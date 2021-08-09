@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CharacterSelectionController : MonoBehaviour
 {
-    public CameraController cameraController;
     public GameObject character;
     public GameObject characterUI;
 
@@ -14,7 +13,7 @@ public class CharacterSelectionController : MonoBehaviour
         if (Input.GetMouseButtonDown(0)&& !EventSystem.current.IsPointerOverGameObject())
         {
             RaycastHit result;
-            Physics.Raycast(cameraController.currentCamera.ScreenPointToRay(Input.mousePosition),out result);
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out result);
             
             if (result.collider&&result.collider.tag == "Character")
             {

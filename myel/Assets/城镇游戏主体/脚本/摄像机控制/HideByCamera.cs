@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class HideByCamera : MonoBehaviour
 {
-    private CameraController cameraController;
     private MeshRenderer meshRenderer;
     void Start()
     {
-        cameraController = FindObjectOfType<CameraController>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -17,7 +15,7 @@ public class HideByCamera : MonoBehaviour
     {
         if (true)
         {
-            if (Vector3.Distance(cameraController.currentCamera.transform.position, transform.position) < 10)
+            if (Vector3.Distance(Camera.main.transform.position, transform.position) < 10)
                 meshRenderer.enabled = false;
             else
                 meshRenderer.enabled = true;
