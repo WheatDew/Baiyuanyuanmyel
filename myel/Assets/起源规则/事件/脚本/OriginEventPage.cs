@@ -27,7 +27,7 @@ public class OriginEventPage : MonoBehaviour
 
                 foreach(var effectItem in item.effectList)
                 {
-                    print(effectItem.name + " " + effectItem.value);
+                    //print(effectItem.name + " " + effectItem.value);
                     effectManager.effectCommand.Push(
                         new EffectData { name = effectItem.name, value = effectItem.value});
                 }

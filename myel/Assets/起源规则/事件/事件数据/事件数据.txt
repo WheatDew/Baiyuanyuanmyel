@@ -1,7 +1,9 @@
 {
     "event": [
         {
-            "name": "摸鱼事件1",
+            "name": "摸鱼事件0",
+            "tag": "摸鱼",
+            "probability": 20,
             "discribe": "小鱼\n非常小的鱼，勉强能充饥？",
             "condition": [
                 "摸鱼结束"
@@ -22,6 +24,35 @@
                         {
                             "name": "饥饿值",
                             "value": "20"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "摸鱼事件1",
+            "tag": "摸鱼",
+            "probability": 20,
+            "discribe": "鱼，好大的鱼，虎纹鲨鱼",
+            "condition": [
+                "摸鱼结束"
+            ],
+            "button": [
+                {
+                    "name": "直接吃掉",
+                    "effect": [
+                        {
+                            "name": "饥饿值",
+                            "value": "20"
+                        }
+                    ]
+                },
+                {
+                    "name": "烤熟后吃",
+                    "effect": [
+                        {
+                            "name": "饥饿值",
+                            "value": "40"
                         }
                     ]
                 }

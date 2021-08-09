@@ -6,10 +6,12 @@ public class OriginEffectManager : MonoBehaviour
 {
     public Stack<EffectData> effectCommand = new Stack<EffectData>();
     private OriginCharacterSelectionSystem selectionSystem;
+    private OriginEventLib eventLib;
 
     private void Start()
     {
         selectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
+        eventLib = FindObjectOfType<OriginEventLib>();
     }
 
     private void Update()
@@ -17,7 +19,7 @@ public class OriginEffectManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            effectCommand.Push(new EffectData {name="饥饿值",value="20" });
+            effectCommand.Push(new EffectData {name="事件跳转",value="摸鱼事件0" });
         }
 
         while (effectCommand.Count != 0)
@@ -41,7 +43,12 @@ public class OriginEffectManager : MonoBehaviour
                     print(value);
                     selectionSystem.targetCharacter.hungerValue += value;
                 }
-
+                break;
+            case "事件跳转":
+                if (eventLib.eventList.ContainsKey(valueStr))
+                {
+                    eventLib.CreateEvenetPage(valueStr);
+                }
                 break;
         }
     }

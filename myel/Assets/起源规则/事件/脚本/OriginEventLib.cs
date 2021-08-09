@@ -10,7 +10,9 @@ public class OriginEventLib : MonoBehaviour
     public Dictionary<string, EventData> eventList = new Dictionary<string, EventData>();
     public HashSet<string> currentCondition = new HashSet<string>();
     public string currentWorkString = "";
-    public float currentWorkTime = 2;
+    public OriginCharacter currentWorkCharacter = null;
+    public bool currentWorkFlag=false;
+    public float currentWorkTime = 4;
 
     private void Start()
     {
@@ -59,26 +61,55 @@ public class OriginEventLib : MonoBehaviour
                 }
                 buttonList.Add(new EventButtonData(_button["name"], effectList));
             }
-            eventList.Add(_event["name"],new EventData(_event["name"], _event["discribe"],conditionSet, buttonList));
+            eventList.Add(_event["name"], new EventData(_event["name"], _event["probability"], _event["tag"], _event["discribe"], conditionSet, buttonList));
         }
         
     }
 
+    //事件条件触发
     public void EventJob()
     {
+
         if (currentCondition.Count != 0)
+        {
+            Dictionary<string, HashSet<string>> tagEvents = new Dictionary<string, HashSet<string>>();
+            Dictionary<string, float> tagProbability = new Dictionary<string, float>();
             foreach (var item in eventList)
             {
-                print(item.Value.condition.Count);
                 if (item.Value.condition.IsSubsetOf(currentCondition))
                 {
-                    CreateEvenetPage(item.Value.name);
-                    foreach(var condition in item.Value.condition)
+                    print("条件判定成功");
+                    if (!tagEvents.ContainsKey(item.Value.tag))
                     {
-                        currentCondition.Remove(condition);
+                        tagEvents.Add(item.Value.tag,new HashSet<string> {item.Value.name });
+                        tagProbability.Add(item.Value.tag, item.Value.probability);
                     }
+                    else
+                    {
+                        tagEvents[item.Value.tag].Add(item.Value.name);
+                        tagProbability[item.Value.tag] += item.Value.probability;
+                    }  
                 }
             }
+
+            foreach(var item in tagEvents)
+            {
+                print(tagProbability[item.Key]);
+                float totalProbability = tagProbability[item.Key];
+                float curentPointer = Random.Range(0, totalProbability);
+                foreach(var eventItem in item.Value)
+                {
+                    if ((curentPointer -= eventList[eventItem].probability) <= 0)
+                    {
+                        CreateEvenetPage(eventList[eventItem].name);
+                        print("生成事件" + eventList[eventItem].name);
+                        break;
+                    }
+                }
+
+            }
+        }
+            
     }
 
     IEnumerator WorkJob()
@@ -94,32 +125,85 @@ public class OriginEventLib : MonoBehaviour
     {
         while (true)
         {
-            if (currentWorkString != "")
+            if (currentWorkString != ""&&currentWorkCharacter!=null)
             {
                 currentCondition.Add(currentWorkString + "开始");
-                print(currentWorkString + "开始");
                 yield return null;
                 currentCondition.Remove(currentWorkString + "开始");
                 currentCondition.Add(currentWorkString + "进行");
-                print(currentWorkString + "进行");
-                yield return new WaitForSeconds(currentWorkTime);
+                currentWorkFlag = true;
+                for(float i = 0; i < currentWorkTime; i += Time.deltaTime)
+                {
+                    //print(Time.deltaTime.ToString()+" "+i);
+                    currentWorkCharacter.currentWorkRate = i*100f / currentWorkTime;
+                    currentWorkCharacter.currentWork = currentWorkString;
+                    yield return null;
+                }
+                currentWorkCharacter.currentWorkRate = 100;
+                //yield return new WaitForSeconds(currentWorkTime);
                 currentCondition.Remove(currentWorkString + "进行");
                 currentCondition.Add(currentWorkString + "结束");
-                print(currentWorkString + "结束");
+                currentWorkCharacter.currentWork = "";
+                currentWorkCharacter.CharacterBubbleInitialize();
                 yield return null;
                 currentCondition.Remove(currentWorkString + "结束");
                 currentWorkString = "";
-                print("收尾");
             }
             yield return null;
         }
     }
 
-    //同步角色工作百分率
-    public 
 
     public void WriteCondition(string condition)
     {
         currentCondition.Add(condition);
     }
+}
+
+
+public class EventData
+{
+    public string name;
+    public float probability;
+    public string tag;
+    public string discribe;
+    public HashSet<string> condition = new HashSet<string>();
+    public List<EventButtonData> buttonList;
+    public EventData(string name,float probability, string tag, string discribe, HashSet<string> condition, List<EventButtonData> buttonList)
+    {
+        this.name = name;
+        this.probability = probability;
+        this.tag = tag;
+        this.discribe = discribe;
+        this.condition = condition;
+        this.buttonList = buttonList;
+    }
+}
+
+public class EventButtonData
+{
+    public string name;
+    public List<EventEffectData> effectList;
+    public EventButtonData(string name, List<EventEffectData> effectList)
+    {
+        this.name = name;
+        this.effectList = effectList;
+    }
+}
+
+public class EventEffectData
+{
+    public string name;
+    public string value;
+    public EventEffectData(string name, string value)
+    {
+        this.name = name;
+        this.value = value;
+    }
+}
+
+public struct EffectData
+{
+    public string name;
+    public string value;
 }

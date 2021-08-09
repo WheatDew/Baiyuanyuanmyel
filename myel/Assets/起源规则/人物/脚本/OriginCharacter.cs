@@ -105,6 +105,7 @@ public class OriginCharacter : MonoBehaviour
 
     public OriginWorkBubble workBubblePrefab;
     public Transform workBubbleParent;
+    public SpriteRenderer workBubble;
     public string currentWork;
     public float currentWorkRate;
     private HashSet<string> workMap = new HashSet<string>();
@@ -113,10 +114,13 @@ public class OriginCharacter : MonoBehaviour
     //显示工作气泡循环
     private void DisplayWorkBubbleJob()
     {
-        //recordArea = new HashSet<string>(EnterArea);
-        //print(!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)) && workMap.Overlaps(EnterArea));
-        if (!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)) && workMap.Overlaps(EnterArea))
+        //print(workMap.Overlaps(EnterArea).ToString() + " " + currentWork+" "+
+        //    (recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)).ToString());
+        if (!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea))
+            && workMap.Overlaps(EnterArea)
+            && currentWork=="")
         {
+            print("增加 ");
 
             HashSet<string> areaIntersect = new HashSet<string>(workMap);
             HashSet<string> workSet = new HashSet<string>();
@@ -142,15 +146,44 @@ public class OriginCharacter : MonoBehaviour
                 obj.originCharacter = this;
                 index++;
             }
-            
         }
 
+        if (!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea))
+            && !workMap.Overlaps(EnterArea)
+            && currentWork == "")
+        {
+            if (workBubbleParent.childCount != 0)
+            {
+                print("销毁");
+                recordArea.Clear();
+                for (int i = 0; i < workBubbleParent.childCount; i++)
+                {
+                    Destroy(workBubbleParent.GetChild(i).gameObject);
+                }
+            }
+
+        }
+
+        if (currentWork == "摸鱼")
+        {
+            if (workBubbleParent.childCount != 0)
+            {
+                for (int i = 0; i < workBubbleParent.childCount; i++)
+                {
+                    Destroy(workBubbleParent.GetChild(i).gameObject);
+                }
+            }
+            workBubble.sprite = characterResource.workTextureLib["摸鱼"];
+            workBubble.transform.parent.gameObject.SetActive(true);
+            recordArea.Clear();
+        }
 
         if (workBubbleParent.childCount != 0
             &&Input.GetMouseButtonDown(0)
             && originRaySystem.clickName=="摸鱼")
         {
             eventLib.currentWorkString = "摸鱼";
+            eventLib.currentWorkCharacter = this;
         }
 
     }
@@ -160,9 +193,16 @@ public class OriginCharacter : MonoBehaviour
         workMap.Add("池塘区域");
     }
 
+    public void CharacterBubbleInitialize()
+    {
+        workBubble.transform.parent.gameObject.SetActive(false);
+        //workBubble.sprite = characterResource.workTextureLib["摸鱼"];
+    }
+
     private void CharacterWorkInitialize()
     {
         CharacterWorkMapInitialize();
+        CharacterBubbleInitialize();
     }
 
     private void CharacterWorkJob()

@@ -8868,6 +8868,8 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 1936975166}
   currentWorkString: 
+  currentWorkCharacter: {fileID: 0}
+  currentWorkFlag: 0
   currentWorkTime: 2
 --- !u!1 &573633411
 GameObject:
@@ -36148,6 +36150,7 @@ MonoBehaviour:
   workBubblePrefab: {fileID: -5329897840635088878, guid: bffcc418dd0262243add877c4b11981a,
     type: 3}
   workBubbleParent: {fileID: 898513524}
+  workBubble: {fileID: 732165709}
   currentWork: 
   currentWorkRate: 0
 --- !u!1 &8051686707429394048
