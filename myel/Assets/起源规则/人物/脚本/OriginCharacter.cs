@@ -17,6 +17,11 @@ public class OriginCharacter : MonoBehaviour
     {
         CharacterPropertyJob();
         CharacterWorkJob();
+        //测试
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            DisplayPack();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -209,6 +214,35 @@ public class OriginCharacter : MonoBehaviour
     {
         DisplayWorkBubbleJob();
     }
+    #endregion
+
+    #region 角色背包模块
+
+    public Dictionary<string, int> pack = new Dictionary<string, int>();
+
+    public void PackAdd(string itemName,int count)
+    {
+        if (pack.ContainsKey(itemName))
+        {
+            pack[itemName] += count;
+        }
+        else
+        {
+            pack.Add(itemName, count);
+        }
+    }
+
+    //测试：显示背包内物体
+    public void DisplayPack()
+    {
+        string s = "";
+        foreach(var item in pack)
+        {
+            s+=item.Key+" "+item.Value+";";
+        }
+        print(s);
+    }
+
     #endregion
 }
 

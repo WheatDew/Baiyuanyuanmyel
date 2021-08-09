@@ -17,11 +17,6 @@ public class OriginEffectManager : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            effectCommand.Push(new EffectData {name="事件跳转",value="摸鱼事件0" });
-        }
-
         while (effectCommand.Count != 0)
         {
             EffectData effectData = effectCommand.Pop();
@@ -41,6 +36,8 @@ public class OriginEffectManager : MonoBehaviour
                 if (float.TryParse(valueStr, out value))
                 {
                     print(value);
+                    if (selectionSystem.targetCharacter == null)
+                        print("目标角色为空");
                     selectionSystem.targetCharacter.hungerValue += value;
                 }
                 break;
@@ -48,6 +45,16 @@ public class OriginEffectManager : MonoBehaviour
                 if (eventLib.eventList.ContainsKey(valueStr))
                 {
                     eventLib.CreateEvenetPage(valueStr);
+                }
+                break;
+            case "背包物品":
+                int count = 0;
+                string[] packValue = valueStr.Split(' ');
+                if(int.TryParse(packValue[1],out count))
+                {
+                    if (selectionSystem.targetCharacter == null)
+                        print("目标角色为空");
+                    selectionSystem.targetCharacter.PackAdd(packValue[0],count);
                 }
                 break;
         }
