@@ -19626,7 +19626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d1ef7f6b3e1054b82c7888e6789924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraController: {fileID: 7480919702510325541}
   character: {fileID: 0}
   characterUI: {fileID: 1464734840}
 --- !u!1 &1393548112
@@ -36062,7 +36061,7 @@ MonoBehaviour:
   characterNavigation: {fileID: 0}
   m_meshRenderer: {fileID: 8051686707429394078}
   m_rigidbody: {fileID: 8051686707308394266}
-  currentTexture: {fileID: 2800000, guid: 66ab6da2f5dc7c141a5645ce3f741d6e, type: 3}
+  currentTexture: {fileID: 2800000, guid: d557eaae3b6aa4e46b7f43aba53855ec, type: 3}
   animationArray: 00000000050000000a0000000f000000
   isNav: 1
 --- !u!54 &8051686707308394266
