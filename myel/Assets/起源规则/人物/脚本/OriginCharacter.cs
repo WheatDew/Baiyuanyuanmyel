@@ -43,6 +43,7 @@ public class OriginCharacter : MonoBehaviour
     private CharacterResource characterResource;
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
+    private OriginEffectManager effectManager;
     private HashSet<string> EnterArea = new HashSet<string>();
 
     public void GeneralInitialize()
@@ -51,6 +52,7 @@ public class OriginCharacter : MonoBehaviour
         characterResource = FindObjectOfType<CharacterResource>();
         originRaySystem = FindObjectOfType<OriginRaySystem>();
         eventLib = FindObjectOfType<OriginEventLib>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
     }
 
     #endregion
@@ -113,63 +115,22 @@ public class OriginCharacter : MonoBehaviour
     public SpriteRenderer workBubble;
     public string currentWork;
     public float currentWorkRate;
+    public bool isClosedTrigger = false;
     private HashSet<string> workMap = new HashSet<string>();
     private HashSet<string> recordArea = new HashSet<string>();
+    private Dictionary<string, EffectData[]> buttonEffectList = new Dictionary<string, EffectData[]>();
 
     //显示工作气泡循环
     private void DisplayWorkBubbleJob()
     {
-        //print(workMap.Overlaps(EnterArea).ToString() + " " + currentWork+" "+
-        //    (recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)).ToString());
-        if (!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea))
-            && workMap.Overlaps(EnterArea)
-            && currentWork=="")
+        //显示图标
+        if (currentWork==""&&!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)))
         {
-            print("增加 ");
-
-            HashSet<string> areaIntersect = new HashSet<string>(workMap);
-            HashSet<string> workSet = new HashSet<string>();
-            areaIntersect.IntersectWith(EnterArea);
-            recordArea = new HashSet<string>(EnterArea);
-
-            foreach (var item in areaIntersect)
-            {
-                print(item);
-                if (characterResource.areaToWorkLib.ContainsKey(item))
-                {
-                    workSet.UnionWith(characterResource.areaToWorkLib[item]);
-                    print(workSet.Count);
-                }
-            }
-            int index = 0;
-            foreach (var item in workSet)
-            {
-                OriginWorkBubble obj = Instantiate(workBubblePrefab, workBubbleParent);
-                obj.SetContent(characterResource.workTextureLib[item]);
-                obj.transform.localPosition = new Vector3(index * 2 - workSet.Count / 2, 4.6f, 0);
-                obj.name = item;
-                obj.originCharacter = this;
-                index++;
-            }
+            StartCharacterWorkButton();
         }
 
-        if (!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea))
-            && !workMap.Overlaps(EnterArea)
-            && currentWork == "")
-        {
-            if (workBubbleParent.childCount != 0)
-            {
-                print("销毁");
-                recordArea.Clear();
-                for (int i = 0; i < workBubbleParent.childCount; i++)
-                {
-                    Destroy(workBubbleParent.GetChild(i).gameObject);
-                }
-            }
-
-        }
-
-        if (currentWork == "摸鱼")
+        //图标事件的触发
+        if (currentWork != "")
         {
             if (workBubbleParent.childCount != 0)
             {
@@ -178,29 +139,97 @@ public class OriginCharacter : MonoBehaviour
                     Destroy(workBubbleParent.GetChild(i).gameObject);
                 }
             }
-            workBubble.sprite = characterResource.workTextureLib["摸鱼"];
-            workBubble.transform.parent.gameObject.SetActive(true);
+            if (characterResource.workTextureLib.ContainsKey(currentWork))
+            {
+                workBubble.sprite = characterResource.workTextureLib[currentWork];
+                workBubble.transform.parent.gameObject.SetActive(true);
+            }
             recordArea.Clear();
         }
 
         if (workBubbleParent.childCount != 0
-            &&Input.GetMouseButtonDown(0)
-            && originRaySystem.clickName=="摸鱼")
+            && Input.GetMouseButtonDown(0))
         {
-            eventLib.currentWorkString = "摸鱼";
-            eventLib.currentWorkCharacter = this;
-        }
+            if ( originRaySystem.clickName == "摸鱼")
+            {
+                eventLib.currentWorkString = "摸鱼";
+                eventLib.currentWorkCharacter = this;
+            }
+            else if (originRaySystem.clickName == "出入口")
+            {
+                recordArea.Clear();
+                if (workBubbleParent.childCount != 0)
+                {
+                    for (int i = 0; i < workBubbleParent.childCount; i++)
+                    {
+                        Destroy(workBubbleParent.GetChild(i).gameObject);
+                    }
+                }
+                foreach(var item in EnterArea)
+                {
+                    effectManager.effectCommand.Push(new EffectData { name = "场景跳转", value = item });
+                }
 
+                EnterArea.Clear();
+
+            }
+        }
     }
 
     private void CharacterWorkMapInitialize()
     {
         workMap.Add("池塘区域");
+        workMap.Add("路灯");
+        workMap.Add("路灯2");
+    }
+
+    //开启工作按钮角色事件
+    public void StartCharacterWorkButton()
+    {
+        if (workBubbleParent.childCount != 0)
+        {
+            recordArea.Clear();
+            for (int i = 0; i < workBubbleParent.childCount; i++)
+            {
+                Destroy(workBubbleParent.GetChild(i).gameObject);
+            }
+        }
+
+        HashSet<string> areaIntersect = new HashSet<string>(workMap);
+        HashSet<string> workSet = new HashSet<string>();
+        areaIntersect.IntersectWith(EnterArea);
+        recordArea = new HashSet<string>(EnterArea);
+
+        foreach (var item in areaIntersect)
+        {
+            if (characterResource.areaToWorkLib.ContainsKey(item))
+            {
+                workSet.UnionWith(characterResource.areaToWorkLib[item]);
+                print(workSet.Count);
+            }
+        }
+        int index = 0;
+        foreach (var item in workSet)
+        {
+            OriginWorkBubble obj = Instantiate(workBubblePrefab, workBubbleParent);
+            obj.SetContent(characterResource.workTextureLib[item]);
+            obj.transform.localPosition = new Vector3(index * 2 - workSet.Count / 2, 4.6f, 0);
+            obj.name = item;
+            obj.originCharacter = this;
+            index++;
+        }
+    }
+
+    //关闭工作按钮
+    public void CloseCharacterWorkButton()
+    {
+
     }
 
     public void CharacterBubbleInitialize()
     {
         workBubble.transform.parent.gameObject.SetActive(false);
+
         //workBubble.sprite = characterResource.workTextureLib["摸鱼"];
     }
 

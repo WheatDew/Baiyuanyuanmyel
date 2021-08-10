@@ -6,12 +6,14 @@ public class OriginEffectManager : MonoBehaviour
 {
     public Stack<EffectData> effectCommand = new Stack<EffectData>();
     private OriginCharacterSelectionSystem selectionSystem;
+    private OriginMapSystem mapSystem;
     private OriginEventLib eventLib;
 
     private void Start()
     {
         selectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
         eventLib = FindObjectOfType<OriginEventLib>();
+        mapSystem = FindObjectOfType<OriginMapSystem>();
     }
 
     private void Update()
@@ -23,8 +25,6 @@ public class OriginEffectManager : MonoBehaviour
 
             ExecuteCommand(effectData.name,effectData.value);
         }
-
-        
     }
 
     private void ExecuteCommand(string nameStr, string valueStr)
@@ -57,6 +57,27 @@ public class OriginEffectManager : MonoBehaviour
                     selectionSystem.targetCharacter.PackAdd(packValue[0],count);
                 }
                 break;
+            case "场景跳转":
+                SceneSwitch(valueStr);
+                break;
         }
     }
+
+    #region 效果处理函数
+
+    //工作按钮效果处理函数
+    public void EffectWorkButton(string value)
+    {
+        if (value == "开启")
+        {
+            selectionSystem.targetCharacter.StartCharacterWorkButton();
+        }
+    }
+
+    public void SceneSwitch(string value)
+    {
+        var valueList= value.Split(' ');
+        mapSystem.SetNewScene(value);
+    }
+    #endregion
 }
