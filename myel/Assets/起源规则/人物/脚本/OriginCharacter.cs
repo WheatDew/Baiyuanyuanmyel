@@ -62,11 +62,48 @@ public class OriginCharacter : MonoBehaviour
     //角色属性
     [Range(0f, 100f)] public float hungerValue, hungerRate;
     private HashSet<string> reportflag = new HashSet<string>();
+    public Dictionary<string, PhysiologyProperty> physiologyProperty = new Dictionary<string, PhysiologyProperty>();
+
+    public void AddPhysiologyProperty(string name,float value,float rate,float standrad)
+    {
+        if (!physiologyProperty.ContainsKey(name))
+        {
+            physiologyProperty.Add(name, new PhysiologyProperty(name, value, rate, standrad));
+        }
+    }
+
+    public void RemovePhysiologyProperty(string name)
+    {
+        if (physiologyProperty.ContainsKey(name))
+            physiologyProperty.Remove(name);
+    }
 
     public void HungerValueRateJob()
     {
         hungerValue -= hungerRate*Time.deltaTime;
+        if (hungerValue > 80)
+            AddPhysiologyProperty("吃饱喝足", 60, 0.5f, 60);
+        if (hungerValue < 50)
+            AddPhysiologyProperty("饥饿", 100, 0.5f, 100);
+
+        HashSet<string> removeList = new HashSet<string>();
+        foreach(var item in physiologyProperty)
+        {
+            physiologyProperty[item.Key].value -= item.Value.rate * Time.deltaTime;
+            if (item.Value.value < 0)
+            {
+                removeList.Add(item.Key);
+            }
+        }
+
+        foreach(var item in removeList)
+        {
+            RemovePhysiologyProperty(item);
+            print("删除条目" + item);
+        }
     }
+
+
 
     //饥饿播报循环
     public void HungerReportJob()

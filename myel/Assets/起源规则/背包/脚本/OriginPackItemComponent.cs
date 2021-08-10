@@ -14,7 +14,7 @@ public class OriginPackItemComponent : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(delegate
         {
-            PushCommand();
+            //PushCommand();
         });
     }
 

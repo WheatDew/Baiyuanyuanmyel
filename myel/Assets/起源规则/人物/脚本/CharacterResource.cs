@@ -23,6 +23,7 @@ public class CharacterResource : MonoBehaviour
     public Dictionary<string, Sprite> workTextureLib = new Dictionary<string, Sprite>();
     public Dictionary<string, HashSet<string>> areaToWorkLib = new Dictionary<string, HashSet<string>>();
 
+
     public void WorkTextureLibInitialize()
     {
         for(int i = 0; i < workNames.Length; i++)
@@ -37,8 +38,24 @@ public class CharacterResource : MonoBehaviour
         areaToWorkLib.Add("池塘区域", new HashSet<string> {"摸鱼"});
         areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
         areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });
+
+
         WorkTextureLibInitialize();
     }
 
     #endregion
+}
+
+public class PhysiologyProperty
+{
+    public string name;
+    public float value, rate, standard;
+
+    public PhysiologyProperty(string name,float value,float rate,float standard)
+    {
+        this.name = name;
+        this.value = value;
+        this.rate = rate;
+        this.standard = standard;
+    }
 }
