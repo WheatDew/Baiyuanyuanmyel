@@ -61,7 +61,7 @@
         {
             "name": "摸鱼事件2",
             "tag": "摸鱼事件",
-            "probability": 10,
+            "probability": 100,
             "discribe": "普通的斧头\n一把从河里捞出来的普通斧头，把它再扔回河里才会发挥它真正的作用",
             "condition": [
                 "摸鱼结束"
@@ -114,7 +114,7 @@
         {
             "name": "摸鱼事件4",
             "tag": "摸鱼事件",
-            "probability": 10,
+            "probability": 100,
             "discribe": "石*剑\n石头和剑，好像一般人拔不出来",
             "condition": [
                 "摸鱼结束"
