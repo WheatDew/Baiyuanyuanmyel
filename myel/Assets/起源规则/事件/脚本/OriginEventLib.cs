@@ -78,7 +78,7 @@ public class OriginEventLib : MonoBehaviour
             {
                 if (item.Value.condition.IsSubsetOf(currentCondition))
                 {
-                    print("条件判定成功");
+                    //print("条件判定成功");
                     if (!tagEvents.ContainsKey(item.Value.tag))
                     {
                         tagEvents.Add(item.Value.tag,new HashSet<string> {item.Value.name });

@@ -16,15 +16,20 @@ public class OriginPackSystem : MonoBehaviour
 
     private Canvas canvas;
     private OriginCharacterSelectionSystem characterSelectionSystem;
+    private OriginEffectManager effectManager;
 
     private void Start()
     {
         canvas = FindObjectOfType<Canvas>();
         characterSelectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
         for(int i = 0; i < itemSprites.Length; i++)
         {
             itemSpriteList.Add(itemSpriteNames[i], itemSprites[i]);
         }
+
+        itemEffectList.Add("大鱼", new Stack<EffectData>());
+        itemEffectList["大鱼"].Push(new EffectData { name = "饥饿值", value = "40" });
     }
 
     private void Update()
@@ -55,12 +60,15 @@ public class OriginPackSystem : MonoBehaviour
     }
 
     //创建背包物体
-    public void CreateItem(string name,int count,Stack<EffectData> effectDatas)
+    public void CreateItem(string name,int count)
     {
         var packPageItem = Instantiate(itemPrefab, pack.createTransform);
+        packPageItem.effectMananger = effectManager;
         packPageItem.count.text = count.ToString();
-        packPageItem.image.sprite = itemSpriteList[name];
-        packPageItem.effectDatas = new Stack<EffectData>(effectDatas);
+        if (itemSpriteList.ContainsKey(name))
+            packPageItem.image.sprite = itemSpriteList[name];
+        if (itemEffectList.ContainsKey(name))
+            packPageItem.effectDatas = new Stack<EffectData>(itemEffectList[name]);
         currentItemList.Add(name, packPageItem);
     }
 
@@ -80,7 +88,7 @@ public class OriginPackSystem : MonoBehaviour
             }
             else
             {
-                CreateItem(item.Key, item.Value, new Stack<EffectData>());
+                CreateItem(item.Key, item.Value );
             }
         }
     }

@@ -242,7 +242,7 @@ public class OriginCharacter : MonoBehaviour
             if (characterResource.areaToWorkLib.ContainsKey(item))
             {
                 workSet.UnionWith(characterResource.areaToWorkLib[item]);
-                print(workSet.Count);
+                //print(workSet.Count);
             }
         }
         int index = 0;

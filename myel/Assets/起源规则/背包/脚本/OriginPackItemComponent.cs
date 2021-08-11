@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OriginPackItemComponent : MonoBehaviour
 {
-    private OriginEffectManager effectMananger;
+    public OriginEffectManager effectMananger;
     public Image image;
     public Text count;
     public Stack<EffectData> effectDatas=new Stack<EffectData>();
@@ -14,7 +14,7 @@ public class OriginPackItemComponent : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(delegate
         {
-            //PushCommand();
+            PushCommand();
         });
     }
 
