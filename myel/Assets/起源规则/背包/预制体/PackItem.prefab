@@ -133,8 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ce9feab67bd1143b5a1792c77847bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectMananger: {fileID: 0}
+  canvas: {fileID: 0}
+  describePerfab: {fileID: 4707834275189447296, guid: 1e81beda88145cb4cb10d98db8d4ab9b,
+    type: 3}
   image: {fileID: 4754960844558373191}
   count: {fileID: 4754960843510731245}
+  describe: 
 --- !u!1 &4754960843510731235
 GameObject:
   m_ObjectHideFlags: 0

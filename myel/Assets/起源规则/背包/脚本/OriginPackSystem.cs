@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LightJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class OriginPackSystem : MonoBehaviour
     private Dictionary<string, Sprite> itemSpriteList = new Dictionary<string, Sprite>();
     private Dictionary<string, OriginPackItemComponent> currentItemList = new Dictionary<string, OriginPackItemComponent>();
     private Dictionary<string, Stack<EffectData>> itemEffectList = new Dictionary<string, Stack<EffectData>>();
+    private Dictionary<string, string> itemDescribeList = new Dictionary<string, string>();
 
     private Canvas canvas;
     private OriginCharacterSelectionSystem characterSelectionSystem;
@@ -28,8 +30,10 @@ public class OriginPackSystem : MonoBehaviour
             itemSpriteList.Add(itemSpriteNames[i], itemSprites[i]);
         }
 
-        itemEffectList.Add("大鱼", new Stack<EffectData>());
-        itemEffectList["大鱼"].Push(new EffectData { name = "饥饿值", value = "40" });
+        ItemDataLibInitialize();
+
+        //itemEffectList.Add("大鱼", new Stack<EffectData>());
+        //itemEffectList["大鱼"].Push(new EffectData { name = "饥饿值", value = "40" });
     }
 
     private void Update()
@@ -64,11 +68,14 @@ public class OriginPackSystem : MonoBehaviour
     {
         var packPageItem = Instantiate(itemPrefab, pack.createTransform);
         packPageItem.effectMananger = effectManager;
+        packPageItem.canvas = canvas;
         packPageItem.count.text = count.ToString();
         if (itemSpriteList.ContainsKey(name))
             packPageItem.image.sprite = itemSpriteList[name];
         if (itemEffectList.ContainsKey(name))
             packPageItem.effectDatas = new Stack<EffectData>(itemEffectList[name]);
+        if (itemDescribeList.ContainsKey(name))
+            packPageItem.describe = itemDescribeList[name];
         currentItemList.Add(name, packPageItem);
     }
 
@@ -91,5 +98,28 @@ public class OriginPackSystem : MonoBehaviour
                 CreateItem(item.Key, item.Value );
             }
         }
+    }
+
+    //读取文件获取背包物品信息
+    public void ItemDataLibInitialize()
+    {
+        string originStr = System.IO.File.ReadAllText(Application.dataPath + @"\起源规则\背包\数据\物品数据.json");
+
+        var json = JsonValue.Parse(originStr);
+
+
+        foreach (var _item in json["item"].AsJsonArray)
+        {
+
+            Stack<EffectData> effectList = new Stack<EffectData>();
+            foreach (var _effect in _item["effect"].AsJsonArray)
+            {
+                effectList.Push(new EffectData { name= _effect["name"],value = _effect["value"] });
+                print(_effect["name"] + " " + _effect["value"]);
+            }
+            itemEffectList.Add(_item["name"], effectList);
+            itemDescribeList.Add(_item["name"], _item["describe"]);
+        }
+
     }
 }
