@@ -8,6 +8,7 @@ public class HideByCamera : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material.renderQueue = 4000;
     }
 
     // Update is called once per frame
