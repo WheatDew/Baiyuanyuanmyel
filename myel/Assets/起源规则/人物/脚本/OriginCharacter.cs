@@ -11,6 +11,7 @@ public class OriginCharacter : MonoBehaviour
     {
         GeneralInitialize();
         CharacterWorkInitialize();
+        SearchModuleInitialize();
     }
 
     private void Update()
@@ -370,6 +371,19 @@ public class OriginCharacter : MonoBehaviour
     //{
     //    groundName = "";
     //}
+
+    #endregion
+
+    #region 角色搜索模块
+
+    public Dictionary<string, SearchData> searchInfoList = new Dictionary<string, SearchData>();
+
+    private void SearchModuleInitialize()
+    {
+        List<EffectData> effectDatas = new List<EffectData>();
+        effectDatas.Add(new EffectData { name = "事件跳转", value = "摸鱼事件0" });
+        searchInfoList.Add("树", new SearchData("树","这是一棵树",effectDatas));
+    }
 
     #endregion
 }

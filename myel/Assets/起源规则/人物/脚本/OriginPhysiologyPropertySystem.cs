@@ -42,6 +42,14 @@ public class OriginPhysiologyPropertySystem : MonoBehaviour
         }
     }
 
+    public void PhysiologyPropertyButton()
+    {
+        if (pack == null)
+            OpenPackPage();
+        else
+            ClosedPackPage();
+    }
+
     public void OpenPackPage()
     {
         pack = Instantiate(packPrefab, canvas.transform);

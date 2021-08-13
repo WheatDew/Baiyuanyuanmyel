@@ -32,7 +32,7 @@
         {
             "name": "摸鱼事件1",
             "tag": "摸鱼事件",
-            "probability": 200,
+            "probability": 20,
             "discribe": "鱼，好大的鱼，虎纹鲨鱼",
             "condition": [
                 "摸鱼结束"
