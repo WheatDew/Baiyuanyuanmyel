@@ -74,11 +74,12 @@ Shader "Earth"
 				half3 colorSample = tex2D(_DiffuseTex, input.uv).rgb;
 
 				half3 cloudAndNightSample = tex2D(_CloudAndNightTex, input.uv).rgb;
-				half3 nightSample = cloudAndNightSample.ggb;
-				half cloudSample = cloudAndNightSample.r;
+				half3 nightSample = cloudAndNightSample.rgb;
+				/*half cloudSample = cloudAndNightSample.r;*/
 
 				half4 result;
-				result.rgb = (colorSample + cloudSample) * input.diffuse + nightSample * input.night + input.atmosphere;
+				/*result.rgb = (colorSample + cloudSample) * input.diffuse + nightSample * input.night + input.atmosphere;*/
+				result.rgb = colorSample  * input.diffuse + nightSample * input.night + input.atmosphere;
 
 				result.a = 1;
 				return result;

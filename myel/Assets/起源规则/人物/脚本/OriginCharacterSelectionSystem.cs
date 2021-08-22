@@ -21,10 +21,6 @@ public class OriginCharacterSelectionSystem : MonoBehaviour
             {
                 targetCharacter = raySystem.clickTarget.GetComponent<OriginCharacter>();
             }
-            //else if(raySystem.clickTag!="Except"&&!EventSystem.current.IsPointerOverGameObject())
-            //{
-            //    targetCharacter = null;
-            //}
         }
     }
 }

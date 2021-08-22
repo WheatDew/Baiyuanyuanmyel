@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterResource : MonoBehaviour
 {
+    #region 通用模块
+
+    public HashSet<OriginCharacter> originCharacters = new HashSet<OriginCharacter>();
 
     private void Start()
     {
@@ -14,6 +17,8 @@ public class CharacterResource : MonoBehaviour
     {
         
     }
+
+    #endregion
 
     #region 工作模块资源数据
 
@@ -44,6 +49,8 @@ public class CharacterResource : MonoBehaviour
     }
 
     #endregion
+
+
 }
 
 public class PhysiologyProperty
@@ -52,6 +59,20 @@ public class PhysiologyProperty
     public float value, rate, standard;
 
     public PhysiologyProperty(string name,float value,float rate,float standard)
+    {
+        this.name = name;
+        this.value = value;
+        this.rate = rate;
+        this.standard = standard;
+    }
+}
+
+public class PsychologyProperty
+{
+    public string name;
+    public float value, rate, standard;
+
+    public PsychologyProperty(string name, float value, float rate, float standard)
     {
         this.name = name;
         this.value = value;

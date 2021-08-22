@@ -386,5 +386,29 @@ public class OriginCharacter : MonoBehaviour
     }
 
     #endregion
+
+    #region 角色心理模块
+
+    public Dictionary<string, PsychologyProperty> psychologyList = new Dictionary<string, PsychologyProperty>();
+
+    //基础函数
+
+    private void CharacterPsychologyPropertyJob()
+    {
+
+    }
+
+    private void CharacterPsychologyPropertyInitialize()
+    {
+
+    }
+
+    //增加条目
+    public void AddPsychologyItem(string name)
+    {
+        psychologyList.Add(name, new PsychologyProperty(name, 0, 0, 0));
+    }
+
+    #endregion
 }
 
