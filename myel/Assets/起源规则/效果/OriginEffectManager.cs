@@ -77,6 +77,7 @@ public class OriginEffectManager : MonoBehaviour
     public void SceneSwitch(string value)
     {
         var valueList= value.Split(' ');
+        print(value);
         mapSystem.SetNewScene(value);
     }
     #endregion

@@ -44,6 +44,8 @@ public class CharacterResource : MonoBehaviour
         areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
         areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });
 
+        areaToWorkLib.Add("曙光_平民_仓库入口", new HashSet<string> { "出入口" });
+        areaToWorkLib.Add("曙光_平民_仓库出口", new HashSet<string> { "出入口" });
 
         WorkTextureLibInitialize();
     }

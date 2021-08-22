@@ -219,6 +219,9 @@ public class OriginCharacter : MonoBehaviour
         workMap.Add("池塘区域");
         workMap.Add("路灯");
         workMap.Add("路灯2");
+
+        workMap.Add("曙光_平民_仓库入口");
+        workMap.Add("曙光_平民_仓库出口");
     }
 
     //开启工作按钮角色事件
