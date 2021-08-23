@@ -4,8 +4,32 @@ using UnityEngine;
 
 public class OriginCharacter : MonoBehaviour
 {
-    
-    #region 通用继承
+
+    #region 通用功能
+
+    //内置类型
+    private Rigidbody m_rigidbody;
+
+    //自定义类型
+    private OriginUserInterfaceController userInterfaceController;
+    private CharacterResource characterResource;
+    private OriginRaySystem originRaySystem;
+    private OriginEventLib eventLib;
+    private OriginEffectManager effectManager;
+    private OriginCharacterSelectionSystem characterSelectionSystem;
+    private HashSet<string> EnterArea = new HashSet<string>();
+
+
+    public void GeneralInitialize()
+    {
+        m_rigidbody = GetComponent<Rigidbody>();
+        userInterfaceController = FindObjectOfType<OriginUserInterfaceController>();
+        characterResource = FindObjectOfType<CharacterResource>();
+        originRaySystem = FindObjectOfType<OriginRaySystem>();
+        eventLib = FindObjectOfType<OriginEventLib>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
+        characterSelectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
+    }
 
     private void Start()
     {
@@ -18,11 +42,12 @@ public class OriginCharacter : MonoBehaviour
     {
         CharacterPropertyJob();
         CharacterWorkJob();
-        //测试
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            DisplayPack();
-        }
+        CharacterMoveJob();
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,25 +60,20 @@ public class OriginCharacter : MonoBehaviour
         EnterArea.Remove(other.name);
     }
 
-    #endregion
-
-    #region 通用功能
-
-    //通用功能
-    private OriginUserInterfaceController userInterfaceController;
-    private CharacterResource characterResource;
-    private OriginRaySystem originRaySystem;
-    private OriginEventLib eventLib;
-    private OriginEffectManager effectManager;
-    private HashSet<string> EnterArea = new HashSet<string>();
-
-    public void GeneralInitialize()
+    private void OnCollisionEnter(Collision collision)
     {
-        userInterfaceController = FindObjectOfType<OriginUserInterfaceController>();
-        characterResource = FindObjectOfType<CharacterResource>();
-        originRaySystem = FindObjectOfType<OriginRaySystem>();
-        eventLib = FindObjectOfType<OriginEventLib>();
-        effectManager = FindObjectOfType<OriginEffectManager>();
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = false;
+        }
     }
 
     #endregion
@@ -317,63 +337,76 @@ public class OriginCharacter : MonoBehaviour
 
     #region 角色动作模块
 
-    //public Rigidbody m_rigidbody;
-    //public float multiple;
-    //public float jumpMultiple;
-    //public bool isGround = false;
-    //public string groundName;
-
-    //private CharacterSelectionController selectionController;
-
-    //private void Start()
-    //{
-    //    selectionController = FindObjectOfType<CharacterSelectionController>();
-    //}
+    public float multiple;
+    public float jumpMultiple;
+    public float maxVelocity;
+    public bool isGround = false;
 
 
-    //private void Update()
-    //{
-    //    if (selectionController.character == gameObject)
-    //    {
-    //        m_rigidbody.AddForce(Input.GetAxis("Horizontal") * multiple, 0, Input.GetAxis("Vertical") * multiple);
+    public void CharacterMoveJob()
+    {
+        if (characterSelectionSystem.targetCharacter!=null&&characterSelectionSystem.targetCharacter == this)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
 
-    //        if (isGround && Input.GetKeyDown(KeyCode.Space))
-    //        {
-    //            m_rigidbody.AddForce(Vector3.up * jumpMultiple);
+                if (m_rigidbody.velocity.x > maxVelocity)
+                {
+                    m_rigidbody.AddForce((maxVelocity - m_rigidbody.velocity.x) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
+                }
+                else
+                {
+                    m_rigidbody.AddForce(multiple, 0, 0, ForceMode.Acceleration);
+                }
 
-    //        }
+                
+            }
+            else if(Input.GetKey(KeyCode.A))
+            {
+                if (m_rigidbody.velocity.x < -maxVelocity)
+                {
+                    m_rigidbody.AddForce((-maxVelocity - m_rigidbody.velocity.x) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
+                }
+                else
+                {
+                    m_rigidbody.AddForce(-multiple, 0, 0, ForceMode.Acceleration);
+                }
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (m_rigidbody.velocity.z > maxVelocity)
+                {
+                    m_rigidbody.AddForce((maxVelocity - m_rigidbody.velocity.z) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
+                }
+                else
+                {
+                    m_rigidbody.AddForce(0, 0, multiple, ForceMode.Acceleration);
+                }
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                if (m_rigidbody.velocity.z < -maxVelocity)
+                {
+                    m_rigidbody.AddForce((-maxVelocity - m_rigidbody.velocity.z) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
+                }
+                else
+                {
+                    m_rigidbody.AddForce(0, 0, -multiple, ForceMode.Acceleration);
+                }
+            }
 
-    //        if (!isGround)
-    //            m_rigidbody.AddForce(Vector3.down * jumpMultiple * 0.01f);
-    //    }
-    //}
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGround = true;
-    //    }
-    //}
+            //m_rigidbody.velocity = new Vector3(vx, vy, vz);
 
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGround = false;
-    //    }
-    //}
+            if (isGround && Input.GetKeyDown(KeyCode.Space))
+            {
+                m_rigidbody.AddForce(Vector3.up * jumpMultiple);
+            }
 
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    groundName = other.gameObject.name;
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    groundName = "";
-    //}
+            if (!isGround)
+                m_rigidbody.AddForce(Vector3.down * jumpMultiple * 0.01f);
+        }
+    }
 
     #endregion
 

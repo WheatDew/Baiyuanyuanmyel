@@ -155,7 +155,7 @@ MonoBehaviour:
   cloud: {fileID: 138888336419300788}
   earthRenderer: {fileID: 1297275510}
   atmosphereRenderer: {fileID: 337355191}
-  dist: 400
+  dist: 800
   day: 0.05
   dayCloud: 0.003
   displayLon: 30
@@ -1612,7 +1612,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1242752584}
         m_MethodName: Start1
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
