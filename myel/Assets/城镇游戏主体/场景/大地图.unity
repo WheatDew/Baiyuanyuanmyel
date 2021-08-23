@@ -913,7 +913,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &749799661
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1527,6 +1527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraCtrl: {fileID: 158759422}
+  discribe: {fileID: 749799660}
 --- !u!1 &1250544696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1612,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1242752584}
         m_MethodName: Start1
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2165,7 +2166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7D27\u6025\u8DC3\u8FC1\u8D77\u6E90"
+  m_Text: "\u672A\u77E5\u8D77\u6E90"
 --- !u!222 &1604791808
 CanvasRenderer:
   m_ObjectHideFlags: 0

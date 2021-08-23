@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LightJson;
+using System.IO;
 
 public class OriginEventLib : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class OriginEventLib : MonoBehaviour
     {
         canvas = FindObjectOfType<Canvas>();
         EventDataLibInitialize();
+        //EventDataLibInitializeElement();
         StartCoroutine(WorkStringCircle());
         StartCoroutine(WorkJob());
     }
@@ -35,9 +37,8 @@ public class OriginEventLib : MonoBehaviour
     }
 
     //读取文件获取事件信息
-    public void EventDataLibInitialize()
+    public void EventDataLibInitializeElement(string originStr)
     {
-        string originStr = System.IO.File.ReadAllText(Application.dataPath + @"\起源规则\事件\事件数据\事件数据.txt");
 
         var json = JsonValue.Parse(originStr);
 
@@ -64,6 +65,27 @@ public class OriginEventLib : MonoBehaviour
             eventList.Add(_event["name"], new EventData(_event["name"], _event["probability"], _event["tag"], _event["discribe"], conditionSet, buttonList));
         }
         
+    }
+
+    //遍历文件夹下所有文件
+    public void EventDataLibInitialize()
+    {
+
+        string[] storyFiles = Directory.GetFiles(Application.dataPath + @"\起源规则\事件\事件数据","*.json");
+
+        print(storyFiles.Length);
+        foreach(var item in storyFiles)
+        {
+            EventDataLibInitializeElement(File.ReadAllText(item));
+        }
+
+        //var files = folder.GetFiles("*.txt");
+        //Debug.Log("files count :" + files.Length);
+        //for (int i = 0; i < files.Length; i++)
+        //{
+        //    Debug.Log(files[i].Name);
+        //}
+
     }
 
     //事件条件触发
@@ -110,6 +132,12 @@ public class OriginEventLib : MonoBehaviour
             }
         }
             
+    }
+
+    //添加初始条件
+    public void AddStartingCondition()
+    {
+        currentCondition.Add("游戏开始时");
     }
 
     IEnumerator WorkJob()
