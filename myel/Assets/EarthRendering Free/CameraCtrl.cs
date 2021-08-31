@@ -120,7 +120,7 @@ public class CameraCtrl : MonoBehaviour
                 theta = 2 * Mathf.PI - arccos;
             }
 
-            print(string.Format("{0} {1} {4} {2} {3}", theta, longitude, phi, latitude,theta+longitude));
+            //print(string.Format("{0} {1} {4} {2} {3}", theta, longitude, phi, latitude,theta+longitude));
         }
 
 
@@ -136,7 +136,7 @@ public class CameraCtrl : MonoBehaviour
         cloudRotation *= Quaternion.AngleAxis(-dayCloud * 2, Vector3.up);
         cloud.rotation = cloudRotation;
 
-        Camera.main.transform.position = new Vector3(400 * Mathf.Sin(latitude) * Mathf.Cos(longitude), 400 * Mathf.Cos(latitude), 400 * Mathf.Sin(longitude) * Mathf.Sin(latitude));
+        Camera.main.transform.position = new Vector3(300 * Mathf.Sin(latitude) * Mathf.Cos(longitude), 300 * Mathf.Cos(latitude), 300 * Mathf.Sin(longitude) * Mathf.Sin(latitude));
 		Camera.main.transform.transform.LookAt(Vector3.zero);
 	}
 

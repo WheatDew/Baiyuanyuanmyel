@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class OriginUserInterfaceController : MonoBehaviour
 {
     //通用功能
@@ -17,6 +17,7 @@ public class OriginUserInterfaceController : MonoBehaviour
     {
         GeneralInitialize();
         DialogueInitialize();
+        ClickDialogueBox();
     }
 
     private void Update()
@@ -32,6 +33,35 @@ public class OriginUserInterfaceController : MonoBehaviour
 
 
     #region 对话框模块
+
+    /// <summary>
+    /// 对话框调用
+    /// </summary>
+    public void CreateDialogueBox()
+    {
+
+    }
+
+    //点击式对话框
+    public void ClickDialogueBox()
+    {
+        Stack<string> ss = new Stack<string>();
+        ss.Push("aa");
+        ss.Push("bb");
+        StartCoroutine(ClickDialogueBoxCoroutine(ss));
+    }
+    //点击式对话框协程
+    public IEnumerator ClickDialogueBoxCoroutine(Stack<string> dialogueData)
+    {
+        while (true)
+        {
+            if(EventSystem.current.firstSelectedGameObject!=null)
+            print(EventSystem.current.firstSelectedGameObject.name);
+
+            yield return null;
+        }
+    }
+
     //初始化对话框
     private void DialogueInitialize()
     {

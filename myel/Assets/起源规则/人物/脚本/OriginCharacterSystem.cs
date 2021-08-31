@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterResource : MonoBehaviour
+public class OriginCharacterSystem : MonoBehaviour
 {
     #region 通用模块
 

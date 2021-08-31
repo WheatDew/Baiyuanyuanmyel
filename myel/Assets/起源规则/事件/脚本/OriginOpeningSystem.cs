@@ -42,7 +42,7 @@ public class OriginOpeningSystem : MonoBehaviour
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
-            print(asyncLoad.progress);
+            //print(asyncLoad.progress);
             yield return null;
         }
     }

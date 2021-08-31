@@ -12,19 +12,19 @@ public class OriginCharacter : MonoBehaviour
 
     //自定义类型
     private OriginUserInterfaceController userInterfaceController;
-    private CharacterResource characterResource;
+    private OriginCharacterSystem characterSystem;
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
     private OriginEffectManager effectManager;
     private OriginCharacterSelectionSystem characterSelectionSystem;
     private HashSet<string> EnterArea = new HashSet<string>();
-
+    
 
     public void GeneralInitialize()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         userInterfaceController = FindObjectOfType<OriginUserInterfaceController>();
-        characterResource = FindObjectOfType<CharacterResource>();
+        characterSystem = FindObjectOfType<OriginCharacterSystem>();
         originRaySystem = FindObjectOfType<OriginRaySystem>();
         eventLib = FindObjectOfType<OriginEventLib>();
         effectManager = FindObjectOfType<OriginEffectManager>();
@@ -197,9 +197,9 @@ public class OriginCharacter : MonoBehaviour
                     Destroy(workBubbleParent.GetChild(i).gameObject);
                 }
             }
-            if (characterResource.workTextureLib.ContainsKey(currentWork))
+            if (characterSystem.workTextureLib.ContainsKey(currentWork))
             {
-                workBubble.sprite = characterResource.workTextureLib[currentWork];
+                workBubble.sprite = characterSystem.workTextureLib[currentWork];
                 workBubble.transform.parent.gameObject.SetActive(true);
             }
             recordArea.Clear();
@@ -263,9 +263,9 @@ public class OriginCharacter : MonoBehaviour
 
         foreach (var item in areaIntersect)
         {
-            if (characterResource.areaToWorkLib.ContainsKey(item))
+            if (characterSystem.areaToWorkLib.ContainsKey(item))
             {
-                workSet.UnionWith(characterResource.areaToWorkLib[item]);
+                workSet.UnionWith(characterSystem.areaToWorkLib[item]);
                 //print(workSet.Count);
             }
         }
@@ -273,7 +273,7 @@ public class OriginCharacter : MonoBehaviour
         foreach (var item in workSet)
         {
             OriginWorkBubble obj = Instantiate(workBubblePrefab, workBubbleParent);
-            obj.SetContent(characterResource.workTextureLib[item]);
+            obj.SetContent(characterSystem.workTextureLib[item]);
             obj.transform.localPosition = new Vector3(index * 2 - workSet.Count / 2, 4.6f, 0);
             obj.name = item;
             obj.originCharacter = this;
@@ -341,7 +341,6 @@ public class OriginCharacter : MonoBehaviour
     public float jumpMultiple;
     public float maxVelocity;
     public bool isGround = false;
-
 
     public void CharacterMoveJob()
     {
@@ -446,5 +445,13 @@ public class OriginCharacter : MonoBehaviour
     }
 
     #endregion
+
+    #region 角色Npc模块
+
+    public bool isNpc;
+    
+
+    #endregion
+
 }
 

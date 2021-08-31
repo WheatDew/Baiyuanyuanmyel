@@ -79,6 +79,8 @@ public class OriginEventLib : MonoBehaviour
             EventDataLibInitializeElement(File.ReadAllText(item));
         }
 
+        currentCondition.Add("游戏开始");
+
         //var files = folder.GetFiles("*.txt");
         //Debug.Log("files count :" + files.Length);
         //for (int i = 0; i < files.Length; i++)
@@ -116,7 +118,7 @@ public class OriginEventLib : MonoBehaviour
 
             foreach(var item in tagEvents)
             {
-                print(tagProbability[item.Key]);
+                //print(tagProbability[item.Key]);
                 float totalProbability = tagProbability[item.Key];
                 float curentPointer = Random.Range(0, totalProbability);
                 foreach(var eventItem in item.Value)
