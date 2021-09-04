@@ -27,7 +27,7 @@ public class OriginCharacterSystem : MonoBehaviour
 
     public Dictionary<string, Sprite> workTextureLib = new Dictionary<string, Sprite>();
     public Dictionary<string, HashSet<string>> areaToWorkLib = new Dictionary<string, HashSet<string>>();
-
+    public Dictionary<string, CharacterActionButton> characterActionButton = new Dictionary<string, CharacterActionButton>();
 
     public void WorkTextureLibInitialize()
     {
@@ -40,6 +40,11 @@ public class OriginCharacterSystem : MonoBehaviour
 
     public void WorkModuleInitialize()
     {
+        Stack<Command> commands = new Stack<Command>();
+        commands.Push(new Command(SystemType.Event, (int)EventCommand.Create, "摸鱼事件1"));
+        CharacterActionButton cab = new CharacterActionButton("摸鱼", commands);
+        characterActionButton.Add("摸鱼",cab);
+
         areaToWorkLib.Add("池塘区域", new HashSet<string> {"摸鱼"});
         areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
         areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });
@@ -53,6 +58,24 @@ public class OriginCharacterSystem : MonoBehaviour
     #endregion
 
 
+}
+
+public class CharacterActionButton
+{
+    public string buttonName;
+    public Stack<Command> commands;
+
+    public CharacterActionButton()
+    {
+        buttonName = "";
+        commands = null;
+    }
+
+    public CharacterActionButton(string buttonName,Stack<Command> commands)
+    {
+        this.buttonName = buttonName;
+        this.commands =new Stack<Command>(commands);
+    }
 }
 
 public class PhysiologyProperty

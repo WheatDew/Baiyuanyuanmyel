@@ -33,13 +33,13 @@ public class OriginPhysiologyPropertySystem : MonoBehaviour
         {
             UpdataByCharacter();
         }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (pack == null)
-                OpenPackPage();
-            else
-                ClosedPackPage();
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    if (pack == null)
+        //        OpenPackPage();
+        //    else
+        //        ClosedPackPage();
+        //}
     }
 
     public void PhysiologyPropertyButton()

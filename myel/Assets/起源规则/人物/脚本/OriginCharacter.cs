@@ -7,8 +7,6 @@ public class OriginCharacter : MonoBehaviour
 
     #region 通用功能
 
-    //内置类型
-    private Rigidbody m_rigidbody;
 
     //自定义类型
     private OriginUserInterfaceController userInterfaceController;
@@ -16,19 +14,16 @@ public class OriginCharacter : MonoBehaviour
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
     private OriginEffectManager effectManager;
-    private OriginCharacterSelectionSystem characterSelectionSystem;
     private HashSet<string> EnterArea = new HashSet<string>();
     
 
     public void GeneralInitialize()
     {
-        m_rigidbody = GetComponent<Rigidbody>();
         userInterfaceController = FindObjectOfType<OriginUserInterfaceController>();
         characterSystem = FindObjectOfType<OriginCharacterSystem>();
         originRaySystem = FindObjectOfType<OriginRaySystem>();
         eventLib = FindObjectOfType<OriginEventLib>();
         effectManager = FindObjectOfType<OriginEffectManager>();
-        characterSelectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
     }
 
     private void Start()
@@ -42,7 +37,7 @@ public class OriginCharacter : MonoBehaviour
     {
         CharacterPropertyJob();
         CharacterWorkJob();
-        CharacterMoveJob();
+
     }
 
     private void FixedUpdate()
@@ -60,21 +55,7 @@ public class OriginCharacter : MonoBehaviour
         EnterArea.Remove(other.name);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGround = true;
-        }
-    }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGround = false;
-        }
-    }
 
     #endregion
 
@@ -177,6 +158,23 @@ public class OriginCharacter : MonoBehaviour
     private HashSet<string> workMap = new HashSet<string>();
     private HashSet<string> recordArea = new HashSet<string>();
     private Dictionary<string, EffectData[]> buttonEffectList = new Dictionary<string, EffectData[]>();
+    private OriginCommandSystem commandSystem;
+
+    //记录角色的行为状态
+    private string currentAction="";
+    private float currentActionTime=0;
+
+    //更改状态的协程
+    private IEnumerator ChangeCurrentAction(string value,float targetTime)
+    {
+        currentActionTime = 0;
+        while (currentActionTime < targetTime)
+        {
+            yield return new WaitForSeconds(0.5f);
+            currentActionTime += 0.5f;
+        }
+        currentAction = value;
+    }
 
     //显示工作气泡循环
     private void DisplayWorkBubbleJob()
@@ -205,32 +203,41 @@ public class OriginCharacter : MonoBehaviour
             recordArea.Clear();
         }
 
+        //按下按钮时触发事件
         if (workBubbleParent.childCount != 0
             && Input.GetMouseButtonDown(0))
         {
-            if ( originRaySystem.clickName == "摸鱼")
+            if (originRaySystem.clickTag == "CharacterButton")
             {
-                eventLib.currentWorkString = "摸鱼";
-                eventLib.currentWorkCharacter = this;
+                print("按下按钮：" + originRaySystem.clickName);
+                commandSystem.PushCommand(characterSystem.characterActionButton[originRaySystem.clickName].commands);
             }
-            else if (originRaySystem.clickName == "出入口")
-            {
-                recordArea.Clear();
-                if (workBubbleParent.childCount != 0)
-                {
-                    for (int i = 0; i < workBubbleParent.childCount; i++)
-                    {
-                        Destroy(workBubbleParent.GetChild(i).gameObject);
-                    }
-                }
-                foreach(var item in EnterArea)
-                {
-                    effectManager.effectCommand.Push(new EffectData { name = "场景跳转", value = item });
-                }
 
-                EnterArea.Clear();
 
-            }
+
+            //if ( originRaySystem.clickName == "摸鱼")
+            //{
+            //    eventLib.currentWorkString = "摸鱼";
+            //    eventLib.currentWorkCharacter = this;
+            //}
+            //else if (originRaySystem.clickName == "出入口")
+            //{
+            //    recordArea.Clear();
+            //    if (workBubbleParent.childCount != 0)
+            //    {
+            //        for (int i = 0; i < workBubbleParent.childCount; i++)
+            //        {
+            //            Destroy(workBubbleParent.GetChild(i).gameObject);
+            //        }
+            //    }
+            //    foreach(var item in EnterArea)
+            //    {
+            //        effectManager.effectCommand.Push(new EffectData { name = "场景跳转", value = item });
+            //    }
+
+            //    EnterArea.Clear();
+
+            //}
         }
     }
 
@@ -290,6 +297,7 @@ public class OriginCharacter : MonoBehaviour
     public void CharacterBubbleInitialize()
     {
         workBubble.transform.parent.gameObject.SetActive(false);
+        commandSystem = FindObjectOfType<OriginCommandSystem>();
 
         //workBubble.sprite = characterResource.workTextureLib["摸鱼"];
     }
@@ -331,80 +339,6 @@ public class OriginCharacter : MonoBehaviour
             s+=item.Key+" "+item.Value+";";
         }
         print(s);
-    }
-
-    #endregion
-
-    #region 角色动作模块
-
-    public float multiple;
-    public float jumpMultiple;
-    public float maxVelocity;
-    public bool isGround = false;
-
-    public void CharacterMoveJob()
-    {
-        if (characterSelectionSystem.targetCharacter!=null&&characterSelectionSystem.targetCharacter == this)
-        {
-            if (Input.GetKey(KeyCode.D))
-            {
-
-                if (m_rigidbody.velocity.x > maxVelocity)
-                {
-                    m_rigidbody.AddForce((maxVelocity - m_rigidbody.velocity.x) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
-                }
-                else
-                {
-                    m_rigidbody.AddForce(multiple, 0, 0, ForceMode.Acceleration);
-                }
-
-                
-            }
-            else if(Input.GetKey(KeyCode.A))
-            {
-                if (m_rigidbody.velocity.x < -maxVelocity)
-                {
-                    m_rigidbody.AddForce((-maxVelocity - m_rigidbody.velocity.x) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
-                }
-                else
-                {
-                    m_rigidbody.AddForce(-multiple, 0, 0, ForceMode.Acceleration);
-                }
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                if (m_rigidbody.velocity.z > maxVelocity)
-                {
-                    m_rigidbody.AddForce((maxVelocity - m_rigidbody.velocity.z) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
-                }
-                else
-                {
-                    m_rigidbody.AddForce(0, 0, multiple, ForceMode.Acceleration);
-                }
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                if (m_rigidbody.velocity.z < -maxVelocity)
-                {
-                    m_rigidbody.AddForce((-maxVelocity - m_rigidbody.velocity.z) / Time.deltaTime, 0, 0, ForceMode.Acceleration);
-                }
-                else
-                {
-                    m_rigidbody.AddForce(0, 0, -multiple, ForceMode.Acceleration);
-                }
-            }
-
-
-            //m_rigidbody.velocity = new Vector3(vx, vy, vz);
-
-            if (isGround && Input.GetKeyDown(KeyCode.Space))
-            {
-                m_rigidbody.AddForce(Vector3.up * jumpMultiple);
-            }
-
-            if (!isGround)
-                m_rigidbody.AddForce(Vector3.down * jumpMultiple * 0.01f);
-        }
     }
 
     #endregion

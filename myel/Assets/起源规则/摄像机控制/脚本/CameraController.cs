@@ -37,15 +37,14 @@ public class CameraController : MonoBehaviour
         child.localPosition = new Vector3(0, cy, cx);
         //child.localPosition = Vector3.Lerp(min, max, currentHight);
         child.localRotation = Quaternion.AngleAxis(Mathf.Pow(cx, 2) * (-0.1f) - 3.6f * cx, Vector3.right);
+
         if (Input.GetMouseButton(2))
             a_camera.transform.position += new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
 
         if (isFollowing && characterSelectionSystem.targetCharacter != null)
         {
-            
             a_camera.transform.position = new Vector3(characterSelectionSystem.targetCharacter.transform.position.x
                 , a_camera.transform.position.y, characterSelectionSystem.targetCharacter.transform.position.z) ;
-            
         }
     }
 }
