@@ -22,6 +22,7 @@ public class OriginCharacterController : MonoBehaviour
 
     private void Update()
     {
+        if(OriginKeyboardSystem.isAction)
         CharacterMoveJob();
     }
 

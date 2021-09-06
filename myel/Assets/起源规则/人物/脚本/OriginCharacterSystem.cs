@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class OriginCharacterSystem : MonoBehaviour
 {
@@ -8,19 +9,60 @@ public class OriginCharacterSystem : MonoBehaviour
 
     public HashSet<OriginCharacter> originCharacters = new HashSet<OriginCharacter>();
 
+    private OriginCommandSystem commandSystem;
+    private OriginEventSystem eventSystem;
+    private OriginEffectManager effectManager;
+    private OriginCharacterSelectionSystem selectionSystem;
+
     private void Start()
     {
+        commandSystem = FindObjectOfType<OriginCommandSystem>();
+        eventSystem = FindObjectOfType<OriginEventSystem>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
+        selectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
         WorkModuleInitialize();
+        CommandStrListInitialize();
     }
 
     private void Update()
     {
+
+    }
+
+    public void CommandStrListInitialize()
+    {
+        //添加指令
+        
+
+        //添加指令字符串
+        commandSystem.strToCommandList.Add("character startdialogue", 
+            new Vector2Int((int)SystemType.Character,(int)CharacterCommand.StartDialogue));
+        commandSystem.strToCommandList.Add("character startmultipledialogue", 
+            new Vector2Int((int)SystemType.Character,(int)CharacterCommand.StartMultipleDialogue));
+
+        //添加效果指令
+        effectManager.effectList.Add("饥饿值", delegate (string value)
+        {
+            if (selectionSystem.targetCharacter != null)
+                selectionSystem.targetCharacter.hungerValue += float.Parse(value);
+        });
+        effectManager.effectList.Add("背包物品", delegate (string value)
+        {
+            int count = 0;
+            string[] packValue = value.Split(' ');
+            if (int.TryParse(packValue[1], out count))
+            {
+                if (selectionSystem.targetCharacter == null)
+                    print("目标角色为空");
+                selectionSystem.targetCharacter.PackAdd(packValue[0], count);
+            }
+        });
         
     }
 
     #endregion
 
-    #region 工作模块资源数据
+    #region 工作模块
 
     public Sprite[] workSprite;
     public string[] workNames;
@@ -35,13 +77,12 @@ public class OriginCharacterSystem : MonoBehaviour
         {
             workTextureLib.Add(workNames[i], workSprite[i]);
         }
-        
     }
 
     public void WorkModuleInitialize()
     {
         Stack<Command> commands = new Stack<Command>();
-        commands.Push(new Command(SystemType.Event, (int)EventCommand.Create, "摸鱼事件1"));
+        commands.Push(new Command((int)SystemType.Event, (int)EventCommand.CreateGroup, "摸鱼事件"));
         CharacterActionButton cab = new CharacterActionButton("摸鱼", commands);
         characterActionButton.Add("摸鱼",cab);
 
@@ -57,8 +98,14 @@ public class OriginCharacterSystem : MonoBehaviour
 
     #endregion
 
+    #region 人物对话模块
 
+    
+
+    #endregion
 }
+
+public enum CharacterCommand { Create,StartDialogue,StartMultipleDialogue};
 
 public class CharacterActionButton
 {

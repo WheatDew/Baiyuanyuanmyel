@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OriginEffectManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class OriginEffectManager : MonoBehaviour
     private OriginCharacterSelectionSystem selectionSystem;
     private OriginMapSystem mapSystem;
     private OriginEventLib eventLib;
+
+    public Dictionary<string, UnityAction<string>> effectList = new Dictionary<string, UnityAction<string>>();
 
     private void Start()
     {
@@ -29,34 +32,11 @@ public class OriginEffectManager : MonoBehaviour
 
     private void ExecuteCommand(string nameStr, string valueStr)
     {
+        effectList[nameStr].Invoke(valueStr);
+
         switch (nameStr)
         {
-            case "饥饿值":
-                float value=0;
-                if (float.TryParse(valueStr, out value))
-                {
-                    print(value);
-                    if (selectionSystem.targetCharacter == null)
-                        print("目标角色为空");
-                    selectionSystem.targetCharacter.hungerValue += value;
-                }
-                break;
-            case "事件跳转":
-                if (eventLib.eventList.ContainsKey(valueStr))
-                {
-                    eventLib.CreateEvenetPage(valueStr);
-                }
-                break;
-            case "背包物品":
-                int count = 0;
-                string[] packValue = valueStr.Split(' ');
-                if(int.TryParse(packValue[1],out count))
-                {
-                    if (selectionSystem.targetCharacter == null)
-                        print("目标角色为空");
-                    selectionSystem.targetCharacter.PackAdd(packValue[0],count);
-                }
-                break;
+
             case "场景跳转":
                 SceneSwitch(valueStr);
                 break;
@@ -81,4 +61,10 @@ public class OriginEffectManager : MonoBehaviour
         mapSystem.SetNewScene(value);
     }
     #endregion
+}
+
+public struct EffectData
+{
+    public string name;
+    public string value;
 }

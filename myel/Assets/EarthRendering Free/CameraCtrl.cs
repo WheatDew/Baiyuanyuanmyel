@@ -136,7 +136,7 @@ public class CameraCtrl : MonoBehaviour
         cloudRotation *= Quaternion.AngleAxis(-dayCloud * 2, Vector3.up);
         cloud.rotation = cloudRotation;
 
-        Camera.main.transform.position = new Vector3(300 * Mathf.Sin(latitude) * Mathf.Cos(longitude), 300 * Mathf.Cos(latitude), 300 * Mathf.Sin(longitude) * Mathf.Sin(latitude));
+        Camera.main.transform.position = new Vector3(dist * Mathf.Sin(latitude) * Mathf.Cos(longitude), dist * Mathf.Cos(latitude), dist * Mathf.Sin(longitude) * Mathf.Sin(latitude));
 		Camera.main.transform.transform.LookAt(Vector3.zero);
 	}
 

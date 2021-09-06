@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class OriginCommandPage : MonoBehaviour
 {
-    private OriginCommandSystem originCommandSystem;
+    private OriginCommandSystem commandSystem;
 
     [SerializeField] private InputField inputField;
 
     private void Start()
     {
-        originCommandSystem = FindObjectOfType<OriginCommandSystem>();
+        commandSystem = FindObjectOfType<OriginCommandSystem>();
     }
 
     public void SendCommand()
@@ -21,23 +21,13 @@ public class OriginCommandPage : MonoBehaviour
         {
             string[] slices = inputField.text.Split(' ');
             Command command = new Command();
-
-            switch (slices[0])
-            {
-                case "event":
-                    command.systemType = SystemType.Event;
-                    break;
-            }
-
-            switch (slices[1])
-            {
-                case "create":
-                    command.commandType = (int)EventCommand.Create;
-                    break;
-            }
+            print(slices[0] + " " + slices[1]);
+            Vector2Int commandId = commandSystem.strToCommandList[slices[0] + " " + slices[1]];
+            command.systemType = commandId.x;
+            command.commandType = commandId.y;
 
             command.commandValue = slices[2];
-            originCommandSystem.PushCommand(command);
+            commandSystem.PushCommand(command);
             print("命令发送成功");
         }
         catch(Exception ex)

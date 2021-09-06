@@ -9,7 +9,6 @@ public class OriginCharacter : MonoBehaviour
 
 
     //自定义类型
-    private OriginUserInterfaceController userInterfaceController;
     private OriginCharacterSystem characterSystem;
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
@@ -19,7 +18,6 @@ public class OriginCharacter : MonoBehaviour
 
     public void GeneralInitialize()
     {
-        userInterfaceController = FindObjectOfType<OriginUserInterfaceController>();
         characterSystem = FindObjectOfType<OriginCharacterSystem>();
         originRaySystem = FindObjectOfType<OriginRaySystem>();
         eventLib = FindObjectOfType<OriginEventLib>();
@@ -110,33 +108,33 @@ public class OriginCharacter : MonoBehaviour
     //饥饿播报循环
     public void HungerReportJob()
     {
-        if (!reportflag.Contains("肚子饿了")&&hungerValue < 50)
-        {
-            userInterfaceController.ActivateReportDialogue("肚子饿了");
-            reportflag.Add("肚子饿了");
-        }
-        if (reportflag.Contains("肚子饿了") && hungerValue > 80)
-        {
-            reportflag.Remove("肚子饿了");
-        }
+        //if (!reportflag.Contains("肚子饿了")&&hungerValue < 50)
+        //{
+        //    userInterfaceController.ActivateReportDialogue("肚子饿了");
+        //    reportflag.Add("肚子饿了");
+        //}
+        //if (reportflag.Contains("肚子饿了") && hungerValue > 80)
+        //{
+        //    reportflag.Remove("肚子饿了");
+        //}
     }
 
     //食物搜寻播报
     public void FoodSearchReportJob()
     {
-        if (!reportflag.Contains("附近有池塘，也许可以抓一些鱼来充饥")
-            && EnterArea.Contains("池塘附近判定区域")
-            && hungerValue < 50)
-        {
-            userInterfaceController.ActivateReportDialogue("附近有池塘，也许可以抓一些鱼来充饥");
-            reportflag.Add("附近有池塘，也许可以抓一些鱼来充饥");
-        }
+        //if (!reportflag.Contains("附近有池塘，也许可以抓一些鱼来充饥")
+        //    && EnterArea.Contains("池塘附近判定区域")
+        //    && hungerValue < 50)
+        //{
+        //    userInterfaceController.ActivateReportDialogue("附近有池塘，也许可以抓一些鱼来充饥");
+        //    reportflag.Add("附近有池塘，也许可以抓一些鱼来充饥");
+        //}
 
-        if (reportflag.Contains("附近有池塘，也许可以抓一些鱼来充饥")
-            && !EnterArea.Contains("池塘附近判定区域"))
-        {
-            reportflag.Remove("附近有池塘，也许可以抓一些鱼来充饥");
-        }
+        //if (reportflag.Contains("附近有池塘，也许可以抓一些鱼来充饥")
+        //    && !EnterArea.Contains("池塘附近判定区域"))
+        //{
+        //    reportflag.Remove("附近有池塘，也许可以抓一些鱼来充饥");
+        //}
     }
 
     public void CharacterPropertyJob()

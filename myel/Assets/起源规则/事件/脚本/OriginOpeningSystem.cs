@@ -8,6 +8,7 @@ public class OriginOpeningSystem : MonoBehaviour
 {
     public CameraCtrl cameraCtrl;
     public Text discribe;
+    public string command;
 
     public void Start1()
     {
@@ -15,6 +16,7 @@ public class OriginOpeningSystem : MonoBehaviour
         cameraCtrl.displayLon = 20;
         cameraCtrl.SetPosition();
         SetText("以白元元为初始角色开始游戏，白元元是各个时空交汇处的观测者，基于这一点她可以在各个不同的时空旅行");
+        command = "紧急跃迁起源故事1";
     }
 
     public void Start2()
@@ -39,12 +41,18 @@ public class OriginOpeningSystem : MonoBehaviour
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
 
+        OriginLargeMapPublicData.publicMapCommands = new List<Command>
+        {
+            new Command((int)SystemType.Character, (int)CharacterCommand.StartMultipleDialogue, command)
+        };
+
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
             //print(asyncLoad.progress);
             yield return null;
         }
+
     }
 
     public void SetText(string content)

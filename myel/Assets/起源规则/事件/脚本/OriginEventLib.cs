@@ -232,8 +232,4 @@ public class EventEffectData
     }
 }
 
-public struct EffectData
-{
-    public string name;
-    public string value;
-}
+
