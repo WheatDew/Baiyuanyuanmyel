@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum SystemType { Empty, Event, Character };
+public enum SystemType { Empty, Event, Character ,Dialogue};
 public class OriginCommandSystem : MonoBehaviour
 {
     [SerializeField] private OriginCommandPage commandPage;
@@ -65,7 +65,7 @@ public class OriginCommandSystem : MonoBehaviour
         while (CommandBuffer.Count != 0)
         {
             Command originCommand= CommandBuffer.Pop();
-            print("开始处理命令" +originCommand.systemType.ToString()+" "+originCommand.commandType.ToString());
+            print("开始处理命令" +originCommand.systemType.ToString()+" "+originCommand.commandType.ToString()+" "+originCommand.commandValue);
             executeCommands[new Vector2Int(originCommand.systemType,originCommand.commandType)].Invoke(originCommand);
         }
     }

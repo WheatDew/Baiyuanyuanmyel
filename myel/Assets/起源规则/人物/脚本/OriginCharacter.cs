@@ -35,7 +35,6 @@ public class OriginCharacter : MonoBehaviour
     {
         CharacterPropertyJob();
         CharacterWorkJob();
-
     }
 
     private void FixedUpdate()

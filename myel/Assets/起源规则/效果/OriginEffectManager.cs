@@ -34,13 +34,6 @@ public class OriginEffectManager : MonoBehaviour
     {
         effectList[nameStr].Invoke(valueStr);
 
-        switch (nameStr)
-        {
-
-            case "场景跳转":
-                SceneSwitch(valueStr);
-                break;
-        }
     }
 
     #region 效果处理函数
@@ -54,12 +47,12 @@ public class OriginEffectManager : MonoBehaviour
         }
     }
 
-    public void SceneSwitch(string value)
-    {
-        var valueList= value.Split(' ');
-        print(value);
-        mapSystem.SetNewScene(value);
-    }
+    //public void SceneSwitch(string value)
+    //{
+    //    var valueList= value.Split(' ');
+    //    print(value);
+    //    mapSystem.SetNewScene(value);
+    //}
     #endregion
 }
 

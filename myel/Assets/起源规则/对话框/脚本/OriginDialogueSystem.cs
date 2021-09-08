@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public enum DialogueCommand { Create,StartDialogue}
 public class OriginDialogueSystem : MonoBehaviour
 {
-    //通用功能
-    private Canvas canvas;
-    private OriginEventSystem eventSystem;
     private OriginCommandSystem commandSystem;
     private OriginEffectManager effectManager;
 
     [SerializeField] private OriginDialogueBox dialoguePrefab;
     [HideInInspector] public OriginDialogueBox dialogue;
 
-    //关闭对话框
-    public void EndDialogue()
+    private void Start()
     {
-        Destroy(dialogue.gameObject);
+        commandSystem = FindObjectOfType<OriginCommandSystem>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
+        DialogueCommandInit();
+    }
+
+    //命令初始化
+    public void DialogueCommandInit()
+    {
 
         //添加指令
-        commandSystem.executeCommands.Add(new Vector2Int((int)SystemType.Character, (int)CharacterCommand.StartDialogue),
+        commandSystem.executeCommands.Add(new Vector2Int((int)SystemType.Dialogue, (int)CharacterCommand.StartDialogue),
             delegate (Command command) { StartDialogue(command.commandValue); });
-        commandSystem.executeCommands.Add(new Vector2Int((int)SystemType.Character, (int)CharacterCommand.StartMultipleDialogue),
-            delegate (Command command) { StartMultipleDialogue(command.commandValue); });
+
+        //添加指令转换
+        commandSystem.strToCommandList.Add("dialogue startdialogue",
+            new Vector2Int((int)SystemType.Dialogue, (int)CharacterCommand.StartDialogue));
 
         //添加效果
-        effectManager.effectList.Add("跳转单个对话", delegate (string value)
+        effectManager.effectList.Add("对话跳转", delegate (string value)
         {
             StartDialogue(value);
-        });
-        effectManager.effectList.Add("跳转对话", delegate (string value)
-        {
-            StartMultipleDialogue(value);
         });
     }
 
@@ -42,19 +44,11 @@ public class OriginDialogueSystem : MonoBehaviour
         if (dialogue == null)
         {
             dialogue = Instantiate(dialoguePrefab, FindObjectOfType<Canvas>().transform);
-            dialogue.SetContent(content);
+            dialogue.SetDialogue(content);
         }
         else
         {
-            dialogue.SetContent(content);
+            dialogue.SetDialogue(content);
         }
-    }
-
-    //创建多个对话框的协程外壳
-    private void StartMultipleDialogue(string name)
-    {
-        //StartCoroutine(StartMultipleDialogueCoroutine(name));
-    }
-
-    
+    }    
 }
