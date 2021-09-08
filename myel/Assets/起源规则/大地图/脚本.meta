@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:myel/Assets/起源规则/大地图/脚本.meta
 guid: babd96969a4f6c144b7ab7eda0db830b
 folderAsset: yes
 DefaultImporter:
+=======
+guid: 1c265f358319662458024df028c12c96
+NativeFormatImporter:
+>>>>>>> 5d12236d6f60a175d45b247c2fcd05237c3261da:myel/Assets/换装游戏主体/默认/默认自然环境/池塘.mat.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
