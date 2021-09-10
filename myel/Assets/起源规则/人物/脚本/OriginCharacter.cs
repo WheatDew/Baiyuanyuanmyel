@@ -240,6 +240,7 @@ public class OriginCharacter : MonoBehaviour
 
     private void CharacterWorkMapInitialize()
     {
+        workMap.Add("爱的小屋");
         workMap.Add("池塘区域");
         workMap.Add("路灯");
         workMap.Add("路灯2");

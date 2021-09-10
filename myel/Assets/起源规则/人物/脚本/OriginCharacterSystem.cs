@@ -86,6 +86,8 @@ public class OriginCharacterSystem : MonoBehaviour
         CharacterActionButton cab = new CharacterActionButton("摸鱼", commands);
         characterActionButton.Add("摸鱼",cab);
 
+
+        areaToWorkLib.Add("爱的小屋", new HashSet<string> { "出入口" });
         areaToWorkLib.Add("池塘区域", new HashSet<string> {"摸鱼"});
         areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
         areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });

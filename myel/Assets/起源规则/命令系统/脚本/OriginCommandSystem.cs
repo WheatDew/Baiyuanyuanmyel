@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum SystemType { Empty, Event, Character ,Dialogue};
+public enum SystemType { Empty, Event, Character ,Dialogue,Room};
 public class OriginCommandSystem : MonoBehaviour
 {
-    [SerializeField] private OriginCommandPage commandPage;
+    [SerializeField] private OriginCommandPage commandPagePrefab;
+    [System.NonSerialized] public OriginCommandPage commandPage;
 
     private Stack<Command> CommandBuffer = new Stack<Command>();
 
@@ -46,15 +47,15 @@ public class OriginCommandSystem : MonoBehaviour
     //显示命令界面
     public void DisplayCommandPage()
     {
-        if (!commandPage.gameObject.activeSelf)
+        if (commandPage==null)
         {
-            commandPage.gameObject.SetActive(true);
             OriginKeyboardSystem.isAction = false;
+            commandPage = Instantiate(commandPagePrefab, FindObjectOfType<Canvas>().transform);
         }
         else
         {
-            commandPage.gameObject.SetActive(false);
             OriginKeyboardSystem.isAction = true;
+            Destroy(commandPage.gameObject);
         }
 
     }
