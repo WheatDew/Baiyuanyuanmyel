@@ -14,6 +14,9 @@ public class OriginCharacterSystem : MonoBehaviour
     private OriginEffectManager effectManager;
     private OriginCharacterSelectionSystem selectionSystem;
 
+    //预制体引用
+    public OriginWorkBubble workBubblePrefab;
+
     private void Start()
     {
         commandSystem = FindObjectOfType<OriginCommandSystem>();
@@ -81,19 +84,19 @@ public class OriginCharacterSystem : MonoBehaviour
 
     public void WorkModuleInitialize()
     {
-        Stack<Command> commands = new Stack<Command>();
-        commands.Push(new Command((int)SystemType.Event, (int)EventCommand.CreateGroup, "摸鱼事件"));
-        CharacterActionButton cab = new CharacterActionButton("摸鱼", commands);
-        characterActionButton.Add("摸鱼",cab);
+        //Stack<Command> commands = new Stack<Command>();
+        //commands.Push(new Command((int)SystemType.Event, (int)EventCommand.CreateGroup, "摸鱼事件"));
+        //CharacterActionButton cab = new CharacterActionButton("摸鱼", commands);
+        //characterActionButton.Add("摸鱼",cab);
 
 
-        areaToWorkLib.Add("爱的小屋", new HashSet<string> { "出入口" });
-        areaToWorkLib.Add("池塘区域", new HashSet<string> {"摸鱼"});
-        areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
-        areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });
+        //areaToWorkLib.Add("爱的小屋", new HashSet<string> { "出入口" });
+        //areaToWorkLib.Add("池塘区域", new HashSet<string> {"摸鱼"});
+        //areaToWorkLib.Add("路灯", new HashSet<string> { "出入口" });
+        //areaToWorkLib.Add("路灯2", new HashSet<string> { "出入口" });
 
-        areaToWorkLib.Add("曙光_平民_仓库入口", new HashSet<string> { "出入口" });
-        areaToWorkLib.Add("曙光_平民_仓库出口", new HashSet<string> { "出入口" });
+        //areaToWorkLib.Add("曙光_平民_仓库入口", new HashSet<string> { "出入口" });
+        //areaToWorkLib.Add("曙光_平民_仓库出口", new HashSet<string> { "出入口" });
 
         WorkTextureLibInitialize();
     }

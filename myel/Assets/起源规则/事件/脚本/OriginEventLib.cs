@@ -19,8 +19,6 @@ public class OriginEventLib : MonoBehaviour
     {
         canvas = FindObjectOfType<Canvas>();
         EventDataLibInitialize();
-        //EventDataLibInitializeElement();
-        StartCoroutine(WorkStringCircle());
         StartCoroutine(WorkJob());
     }
 
@@ -147,38 +145,6 @@ public class OriginEventLib : MonoBehaviour
         while (true)
         {
             EventJob();
-            yield return null;
-        }
-    }
-
-    IEnumerator WorkStringCircle()
-    {
-        while (true)
-        {
-            if (currentWorkString != ""&&currentWorkCharacter!=null)
-            {
-                currentCondition.Add(currentWorkString + "开始");
-                yield return null;
-                currentCondition.Remove(currentWorkString + "开始");
-                currentCondition.Add(currentWorkString + "进行");
-                currentWorkFlag = true;
-                for(float i = 0; i < currentWorkTime; i += Time.deltaTime)
-                {
-                    //print(Time.deltaTime.ToString()+" "+i);
-                    currentWorkCharacter.currentWorkRate = i*100f / currentWorkTime;
-                    currentWorkCharacter.currentWork = currentWorkString;
-                    yield return null;
-                }
-                currentWorkCharacter.currentWorkRate = 100;
-                //yield return new WaitForSeconds(currentWorkTime);
-                currentCondition.Remove(currentWorkString + "进行");
-                currentCondition.Add(currentWorkString + "结束");
-                currentWorkCharacter.currentWork = "";
-                currentWorkCharacter.CharacterBubbleInitialize();
-                yield return null;
-                currentCondition.Remove(currentWorkString + "结束");
-                currentWorkString = "";
-            }
             yield return null;
         }
     }

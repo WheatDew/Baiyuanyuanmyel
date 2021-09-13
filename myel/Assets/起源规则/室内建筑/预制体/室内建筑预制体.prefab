@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1664364637817407178}
   - component: {fileID: 3530247716376736256}
   - component: {fileID: 7148276519944596376}
+  - component: {fileID: 3788820471740538612}
   m_Layer: 0
   m_Name: "\u5BA4\u5185\u5EFA\u7B51\u9884\u5236\u4F53"
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3169700605739094997}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 63.46, y: 5.6, z: 87.97}
-  m_LocalScale: {x: 8, y: 5.5, z: 5.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,3 +94,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 3530247716376736256}
+  colliderObj: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
+--- !u!64 &3788820471740538612
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3169700605739094997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4284182221599607849, guid: 043bee34a8705e3448e98898b02cc473, type: 3}

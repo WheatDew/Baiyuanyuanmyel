@@ -13,7 +13,7 @@ public class OriginCharacter : MonoBehaviour
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
     private OriginEffectManager effectManager;
-    private HashSet<string> EnterArea = new HashSet<string>();
+    //private HashSet<string> EnterArea = new HashSet<string>();
     
 
     public void GeneralInitialize()
@@ -42,15 +42,15 @@ public class OriginCharacter : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        EnterArea.Add(other.name);
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    EnterArea.Add(other.name);
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        EnterArea.Remove(other.name);
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    EnterArea.Remove(other.name);
+    //}
 
 
 
@@ -146,14 +146,14 @@ public class OriginCharacter : MonoBehaviour
 
     #region 角色工作模块
 
-    public OriginWorkBubble workBubblePrefab;
     public Transform workBubbleParent;
     public SpriteRenderer workBubble;
     public string currentWork;
     public float currentWorkRate;
     public bool isClosedTrigger = false;
-    private HashSet<string> workMap = new HashSet<string>();
-    private HashSet<string> recordArea = new HashSet<string>();
+    public Dictionary<string, Command> TriggerCommands = new Dictionary<string, Command>();
+    private int LastTriggerCommandsCount = 0;
+
     private Dictionary<string, EffectData[]> buttonEffectList = new Dictionary<string, EffectData[]>();
     private OriginCommandSystem commandSystem;
 
@@ -176,134 +176,42 @@ public class OriginCharacter : MonoBehaviour
     //显示工作气泡循环
     private void DisplayWorkBubbleJob()
     {
-        //显示图标
-        if (currentWork==""&&!(recordArea.Count == EnterArea.Count && recordArea.IsSubsetOf(EnterArea)))
+        if (LastTriggerCommandsCount != TriggerCommands.Count)
         {
-            StartCharacterWorkButton();
+            DrawWorkButtonByList();
+            LastTriggerCommandsCount = TriggerCommands.Count;
         }
 
-        //图标事件的触发
-        if (currentWork != "")
-        {
-            if (workBubbleParent.childCount != 0)
-            {
-                for (int i = 0; i < workBubbleParent.childCount; i++)
-                {
-                    Destroy(workBubbleParent.GetChild(i).gameObject);
-                }
-            }
-            if (characterSystem.workTextureLib.ContainsKey(currentWork))
-            {
-                workBubble.sprite = characterSystem.workTextureLib[currentWork];
-                workBubble.transform.parent.gameObject.SetActive(true);
-            }
-            recordArea.Clear();
-        }
-
-        //按下按钮时触发事件
-        if (workBubbleParent.childCount != 0
-            && Input.GetMouseButtonDown(0))
-        {
-            if (originRaySystem.clickTag == "CharacterButton")
-            {
-                print("按下按钮：" + originRaySystem.clickName);
-                commandSystem.PushCommand(characterSystem.characterActionButton[originRaySystem.clickName].commands);
-            }
-
-
-
-            //if ( originRaySystem.clickName == "摸鱼")
-            //{
-            //    eventLib.currentWorkString = "摸鱼";
-            //    eventLib.currentWorkCharacter = this;
-            //}
-            //else if (originRaySystem.clickName == "出入口")
-            //{
-            //    recordArea.Clear();
-            //    if (workBubbleParent.childCount != 0)
-            //    {
-            //        for (int i = 0; i < workBubbleParent.childCount; i++)
-            //        {
-            //            Destroy(workBubbleParent.GetChild(i).gameObject);
-            //        }
-            //    }
-            //    foreach(var item in EnterArea)
-            //    {
-            //        effectManager.effectCommand.Push(new EffectData { name = "场景跳转", value = item });
-            //    }
-
-            //    EnterArea.Clear();
-
-            //}
-        }
     }
 
-    private void CharacterWorkMapInitialize()
+    //绘制工作按钮
+    public void DrawWorkButtonByList()
     {
-        workMap.Add("爱的小屋");
-        workMap.Add("池塘区域");
-        workMap.Add("路灯");
-        workMap.Add("路灯2");
-
-        workMap.Add("曙光_平民_仓库入口");
-        workMap.Add("曙光_平民_仓库出口");
-    }
-
-    //开启工作按钮角色事件
-    public void StartCharacterWorkButton()
-    {
-        if (workBubbleParent.childCount != 0)
+        for (int i = 0; i < workBubbleParent.childCount; i++)
         {
-            recordArea.Clear();
-            for (int i = 0; i < workBubbleParent.childCount; i++)
-            {
-                Destroy(workBubbleParent.GetChild(i).gameObject);
-            }
+            Destroy(workBubbleParent.GetChild(i).gameObject);
         }
 
-        HashSet<string> areaIntersect = new HashSet<string>(workMap);
-        HashSet<string> workSet = new HashSet<string>();
-        areaIntersect.IntersectWith(EnterArea);
-        recordArea = new HashSet<string>(EnterArea);
-
-        foreach (var item in areaIntersect)
-        {
-            if (characterSystem.areaToWorkLib.ContainsKey(item))
-            {
-                workSet.UnionWith(characterSystem.areaToWorkLib[item]);
-                //print(workSet.Count);
-            }
-        }
         int index = 0;
-        foreach (var item in workSet)
+        foreach (var item in TriggerCommands)
         {
-            OriginWorkBubble obj = Instantiate(workBubblePrefab, workBubbleParent);
-            obj.SetContent(characterSystem.workTextureLib[item]);
-            obj.transform.localPosition = new Vector3(index * 2 - workSet.Count / 2, 4.6f, 0);
-            obj.name = item;
+            OriginWorkBubble obj = Instantiate(characterSystem.workBubblePrefab, workBubbleParent);
+            obj.SetContent(characterSystem.workTextureLib[item.Key],item.Value,commandSystem);
+            obj.transform.localPosition = new Vector3(index * 2 - TriggerCommands.Count / 2, 4.6f, 0);
+            obj.name = item.Key;
             obj.originCharacter = this;
             index++;
         }
     }
 
-    //关闭工作按钮
-    public void CloseCharacterWorkButton()
-    {
-
-    }
-
-    public void CharacterBubbleInitialize()
-    {
-        workBubble.transform.parent.gameObject.SetActive(false);
-        commandSystem = FindObjectOfType<OriginCommandSystem>();
-
-        //workBubble.sprite = characterResource.workTextureLib["摸鱼"];
-    }
-
     private void CharacterWorkInitialize()
     {
-        CharacterWorkMapInitialize();
-        CharacterBubbleInitialize();
+        //数据初始化
+        workBubble.transform.parent.gameObject.SetActive(false);
+        commandSystem = FindObjectOfType<OriginCommandSystem>();
+        //绘制气泡初始化
+        
+
     }
 
     private void CharacterWorkJob()

@@ -38,21 +38,7 @@ public class OriginEffectManager : MonoBehaviour
 
     #region 效果处理函数
 
-    //工作按钮效果处理函数
-    public void EffectWorkButton(string value)
-    {
-        if (value == "开启")
-        {
-            selectionSystem.targetCharacter.StartCharacterWorkButton();
-        }
-    }
-
-    //public void SceneSwitch(string value)
-    //{
-    //    var valueList= value.Split(' ');
-    //    print(value);
-    //    mapSystem.SetNewScene(value);
-    //}
+ 
     #endregion
 }
 
