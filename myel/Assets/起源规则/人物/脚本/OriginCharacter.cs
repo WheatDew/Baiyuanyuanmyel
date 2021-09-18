@@ -13,23 +13,25 @@ public class OriginCharacter : MonoBehaviour
     private OriginRaySystem originRaySystem;
     private OriginEventLib eventLib;
     private OriginEffectManager effectManager;
-    //private HashSet<string> EnterArea = new HashSet<string>();
+
+    //描述
+    public string realName;
     
 
-    public void GeneralInitialize()
-    {
-        characterSystem = FindObjectOfType<OriginCharacterSystem>();
-        originRaySystem = FindObjectOfType<OriginRaySystem>();
-        eventLib = FindObjectOfType<OriginEventLib>();
-        effectManager = FindObjectOfType<OriginEffectManager>();
-    }
+    
 
     private void Start()
     {
+
+
         GeneralInitialize();
         CharacterWorkInitialize();
         SearchModuleInitialize();
+
+        characterSystem.characterList.Add(realName, this);
     }
+
+
 
     private void Update()
     {
@@ -40,6 +42,14 @@ public class OriginCharacter : MonoBehaviour
     private void FixedUpdate()
     {
         
+    }
+
+    public void GeneralInitialize()
+    {
+        characterSystem = FindObjectOfType<OriginCharacterSystem>();
+        originRaySystem = FindObjectOfType<OriginRaySystem>();
+        eventLib = FindObjectOfType<OriginEventLib>();
+        effectManager = FindObjectOfType<OriginEffectManager>();
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -234,6 +244,11 @@ public class OriginCharacter : MonoBehaviour
         {
             pack.Add(itemName, count);
         }
+    }
+
+    public void PackRemove(string itemName,int count)
+    {
+
     }
 
     //测试：显示背包内物体

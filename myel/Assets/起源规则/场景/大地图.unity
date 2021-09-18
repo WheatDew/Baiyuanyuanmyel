@@ -155,9 +155,9 @@ MonoBehaviour:
   cloud: {fileID: 138888336419300788}
   earthRenderer: {fileID: 1297275510}
   atmosphereRenderer: {fileID: 337355191}
-  dist: 250
+  dist: 350
   day: 0.05
-  dayCloud: 0.003
+  dayCloud: 0.001
   displayLon: 30
   displayLat: -36
 --- !u!20 &158759423
@@ -594,7 +594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &660316768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1456,13 +1456,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.7739825, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e7e9dd3260ad3844ad19a8c541a0d8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9f46b14c92989d945858a33968b02aad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2010,7 +2010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1432774018
 RectTransform:
   m_ObjectHideFlags: 0

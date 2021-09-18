@@ -17,6 +17,7 @@ Shader "Earth"
 
 	SubShader 
 	{
+
 		ZWrite On
 		ZTest LEqual
 
@@ -33,6 +34,7 @@ Shader "Earth"
 			float4 _AtmosphereColor;
 			float _AtmospherePow;
 			float _AtmosphereMultiply;
+			fixed _Cutoff;
 
 			//float4 _LightDir;
 
@@ -71,9 +73,10 @@ Shader "Earth"
 
 			half4 frag(vertexOutput input) : Color
 			{
-				half3 colorSample = tex2D(_DiffuseTex, input.uv).rgb;
+				half4 colorSample = tex2D(_DiffuseTex, input.uv);
 
-				half3 cloudAndNightSample = tex2D(_CloudAndNightTex, input.uv).rgb;
+				half4 cloudAndNightSample = tex2D(_CloudAndNightTex, input.uv);
+
 				half3 nightSample = cloudAndNightSample.rgb;
 				/*half cloudSample = cloudAndNightSample.r;*/
 

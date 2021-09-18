@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum SystemType { Empty, Event, Character ,Dialogue,Room};
+public enum SystemType { Empty, Event, Character ,Dialogue,Room,Plant};
 public class OriginCommandSystem : MonoBehaviour
 {
     [SerializeField] private OriginCommandPage commandPagePrefab;

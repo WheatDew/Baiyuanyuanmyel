@@ -5,6 +5,13 @@ using UnityEngine;
 public class OriginPackComponent : MonoBehaviour
 {
     public Transform createTransform;
+    private OriginPackSystem packSystem;
+
+    private void Start()
+    {
+        packSystem = FindObjectOfType<OriginPackSystem>();
+        packSystem.UpdataByCharacter();
+    }
 
     public void OnDisable()
     {
@@ -12,5 +19,6 @@ public class OriginPackComponent : MonoBehaviour
         {
             Destroy(createTransform.GetChild(i).gameObject);
         }
+        packSystem.currentItemList.Clear();
     }
 }

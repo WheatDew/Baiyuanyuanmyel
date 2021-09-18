@@ -45,17 +45,26 @@ public class OriginPhysiologyPropertySystem : MonoBehaviour
     public void PhysiologyPropertyButton()
     {
         if (pack == null)
-            OpenPackPage();
+            OpenPhysiologyPropertyPage();
         else
-            ClosedPackPage();
+            ClosedPhysiologyPropertyPage();
     }
 
-    public void OpenPackPage()
+    public void OpenPhysiologyPropertyPage()
     {
-        pack = Instantiate(packPrefab, canvas.transform);
+        if (pack == null)
+        {
+            pack = Instantiate(packPrefab, canvas.transform);
+        }
+        else
+        {
+            Destroy(pack.gameObject);
+            currentItemList.Clear();
+            pack = null;
+        }
     }
 
-    public void ClosedPackPage()
+    public void ClosedPhysiologyPropertyPage()
     {
         Destroy(pack.gameObject);
         currentItemList.Clear();

@@ -12,7 +12,7 @@ public class OriginPackSystem : MonoBehaviour
     public Sprite[] itemSprites;
     public string[] itemSpriteNames;
     private Dictionary<string, Sprite> itemSpriteList = new Dictionary<string, Sprite>();
-    private Dictionary<string, OriginPackItemComponent> currentItemList = new Dictionary<string, OriginPackItemComponent>();
+    public Dictionary<string, OriginPackItemComponent> currentItemList = new Dictionary<string, OriginPackItemComponent>();
     private Dictionary<string, Stack<EffectData>> itemEffectList = new Dictionary<string, Stack<EffectData>>();
     private Dictionary<string, string> itemDescribeList = new Dictionary<string, string>();
 
@@ -61,7 +61,17 @@ public class OriginPackSystem : MonoBehaviour
 
     public void OpenPackPage()
     {
-        pack = Instantiate(packPrefab,canvas.transform);
+        if (pack == null)
+        {
+            pack = Instantiate(packPrefab, canvas.transform);
+        }
+        else
+        {
+            Destroy(pack.gameObject);
+            currentItemList.Clear();
+            pack = null;
+        }
+        
     }
 
     public void ClosedPackPage()
@@ -89,23 +99,31 @@ public class OriginPackSystem : MonoBehaviour
 
     public void SetItem(string name,int count)
     {
+        //print(currentItemList[name]==null);
         currentItemList[name].count.text = count.ToString();
     }
 
     //根据当前角色刷新背包物体
     public void UpdataByCharacter()
     {
-        foreach(var item in characterSelectionSystem.targetCharacter.pack)
+        if (pack != null)
         {
-            if (currentItemList.ContainsKey(item.Key))
+            string s = currentItemList.Count.ToString() + " " + characterSelectionSystem.targetCharacter.pack.Count.ToString();
+            //if (s!="1 1")
+            //print(s);
+            foreach (var item in characterSelectionSystem.targetCharacter.pack)
             {
-                SetItem(item.Key, item.Value);
-            }
-            else
-            {
-                CreateItem(item.Key, item.Value );
+                if (currentItemList.ContainsKey(item.Key))
+                {
+                    SetItem(item.Key, item.Value);
+                }
+                else
+                {
+                    CreateItem(item.Key, item.Value);
+                }
             }
         }
+        
     }
 
     //读取文件获取背包物品信息

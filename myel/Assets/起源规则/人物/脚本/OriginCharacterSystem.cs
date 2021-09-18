@@ -10,9 +10,11 @@ public class OriginCharacterSystem : MonoBehaviour
     public HashSet<OriginCharacter> originCharacters = new HashSet<OriginCharacter>();
 
     private OriginCommandSystem commandSystem;
-    private OriginEventSystem eventSystem;
     private OriginEffectManager effectManager;
     private OriginCharacterSelectionSystem selectionSystem;
+
+    //储存列表
+    public Dictionary<string, OriginCharacter> characterList = new Dictionary<string, OriginCharacter>();
 
     //预制体引用
     public OriginWorkBubble workBubblePrefab;
@@ -20,7 +22,6 @@ public class OriginCharacterSystem : MonoBehaviour
     private void Start()
     {
         commandSystem = FindObjectOfType<OriginCommandSystem>();
-        eventSystem = FindObjectOfType<OriginEventSystem>();
         effectManager = FindObjectOfType<OriginEffectManager>();
         selectionSystem = FindObjectOfType<OriginCharacterSelectionSystem>();
         WorkModuleInitialize();
@@ -42,6 +43,12 @@ public class OriginCharacterSystem : MonoBehaviour
             new Vector2Int((int)SystemType.Character,(int)CharacterCommand.StartDialogue));
         commandSystem.strToCommandList.Add("character startmultipledialogue", 
             new Vector2Int((int)SystemType.Character,(int)CharacterCommand.StartMultipleDialogue));
+        commandSystem.strToCommandList.Add("character additem",
+            new Vector2Int((int)SystemType.Character, (int)CharacterCommand.AddItem));
+
+        //添加指令函数
+        commandSystem.executeCommands.Add(new Vector2Int((int)SystemType.Character, (int)CharacterCommand.AddItem),
+            delegate (Command command) { AddItemForCharacter(command.commandValue); });
 
         //添加效果指令
         effectManager.effectList.Add("饥饿值", delegate (string value)
@@ -61,6 +68,23 @@ public class OriginCharacterSystem : MonoBehaviour
             }
         });
         
+    }
+
+    #endregion
+
+    #region 背包模块
+
+    //给指定角色添加物品
+    private void AddItemForCharacter(string command)
+    {
+        string[] info = command.Split(',');
+        for(int i = 1; i < info.Length; i++)
+        {
+            if (info[i][0] == '$')
+            {
+                characterList[info[0]].PackAdd(info[i].Substring(1), 1);
+            }
+        }
     }
 
     #endregion
@@ -110,7 +134,7 @@ public class OriginCharacterSystem : MonoBehaviour
     #endregion
 }
 
-public enum CharacterCommand { Create,StartDialogue,StartMultipleDialogue};
+public enum CharacterCommand { Create,StartDialogue,StartMultipleDialogue,AddItem};
 
 public class CharacterActionButton
 {
