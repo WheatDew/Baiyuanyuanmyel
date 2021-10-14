@@ -12,13 +12,15 @@ public class OriginAnimal : MonoBehaviour
 
     private Rigidbody m_rigidbody;
 
-    public Transform target;
+    public Vector3 target;
+    public float updateTargetTime=0;
 
 
     private void Start()
     {
         material = FindObjectOfType<MeshRenderer>().material;
         m_rigidbody = GetComponent<Rigidbody>();
+        target = transform.position;
     }
 
     private void Update()
@@ -33,6 +35,8 @@ public class OriginAnimal : MonoBehaviour
         PathFindingJob();
 
         AnimationDirectionJob();
+
+        UpdateTargetJob();
     }
 
     //设置动画图片索引
@@ -66,9 +70,13 @@ public class OriginAnimal : MonoBehaviour
     //设置动物寻路
     public void PathFindingJob()
     {
-        Vector3 p = target.position-transform.position;
-        p.y = 0;
-        m_rigidbody.AddForce(p, ForceMode.Acceleration);
+        if (Vector3.Distance(target, transform.position)>1)
+        {
+            Vector3 p = target - transform.position;
+            p.y = 0;
+            m_rigidbody.AddForce(p, ForceMode.Acceleration);
+        }
+        
     }
 
     //设置图片方向
@@ -83,4 +91,19 @@ public class OriginAnimal : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
     }
+
+    //动物散步逻辑
+    public void UpdateTargetJob()
+    {
+        updateTargetTime += Time.deltaTime;
+        if (updateTargetTime > 5)
+        {
+            target= new Vector3(transform.position.x + Random.Range(-20f, 20f),
+            0, transform.position.z + Random.Range(-20f, 20f));
+            updateTargetTime = 0;
+        }
+    }
+
+    //函数集
+
 }

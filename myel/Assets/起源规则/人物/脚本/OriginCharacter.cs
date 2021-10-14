@@ -17,9 +17,6 @@ public class OriginCharacter : MonoBehaviour
     //描述
     public string realName;
     
-
-    
-
     private void Start()
     {
 
@@ -37,11 +34,10 @@ public class OriginCharacter : MonoBehaviour
     {
         CharacterPropertyJob();
         CharacterWorkJob();
-    }
-
-    private void FixedUpdate()
-    {
-        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            DisplayPack();
+        }
     }
 
     public void GeneralInitialize()
@@ -51,18 +47,6 @@ public class OriginCharacter : MonoBehaviour
         eventLib = FindObjectOfType<OriginEventLib>();
         effectManager = FindObjectOfType<OriginEffectManager>();
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    EnterArea.Add(other.name);
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    EnterArea.Remove(other.name);
-    //}
-
-
 
     #endregion
 
@@ -112,8 +96,6 @@ public class OriginCharacter : MonoBehaviour
         }
     }
 
-
-
     //饥饿播报循环
     public void HungerReportJob()
     {
@@ -152,6 +134,7 @@ public class OriginCharacter : MonoBehaviour
         HungerReportJob();
         FoodSearchReportJob();
     }
+
     #endregion
 
     #region 角色工作模块

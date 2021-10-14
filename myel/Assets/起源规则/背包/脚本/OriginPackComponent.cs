@@ -13,12 +13,10 @@ public class OriginPackComponent : MonoBehaviour
         packSystem.UpdataByCharacter();
     }
 
-    public void OnDisable()
+    
+
+    public void OnDestroy()
     {
-        for(int i = 0; i < createTransform.childCount; i++)
-        {
-            Destroy(createTransform.GetChild(i).gameObject);
-        }
         packSystem.currentItemList.Clear();
     }
 }

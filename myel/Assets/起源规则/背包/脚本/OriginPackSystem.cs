@@ -42,13 +42,14 @@ public class OriginPackSystem : MonoBehaviour
         {
             UpdataByCharacter();
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (pack == null)
-                OpenPackPage();
-            else
-                ClosedPackPage();
-        }
+        //背包按钮
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    if (pack == null)
+        //        OpenPackPage();
+        //    else
+        //        ClosedPackPage();
+        //}
     }
 
     public void PackButton()
@@ -68,7 +69,6 @@ public class OriginPackSystem : MonoBehaviour
         else
         {
             Destroy(pack.gameObject);
-            currentItemList.Clear();
             pack = null;
         }
         
@@ -77,7 +77,6 @@ public class OriginPackSystem : MonoBehaviour
     public void ClosedPackPage()
     {
         Destroy(pack.gameObject);
-        currentItemList.Clear();
         pack = null;
     }
 
@@ -108,18 +107,17 @@ public class OriginPackSystem : MonoBehaviour
     {
         if (pack != null)
         {
-            string s = currentItemList.Count.ToString() + " " + characterSelectionSystem.targetCharacter.pack.Count.ToString();
-            //if (s!="1 1")
-            //print(s);
             foreach (var item in characterSelectionSystem.targetCharacter.pack)
             {
                 if (currentItemList.ContainsKey(item.Key))
                 {
                     SetItem(item.Key, item.Value);
+                    //print("设置" + item.Key);
                 }
                 else
                 {
                     CreateItem(item.Key, item.Value);
+                    //print("创建" + item.Key);
                 }
             }
         }
@@ -148,4 +146,6 @@ public class OriginPackSystem : MonoBehaviour
         }
 
     }
+
+    
 }
